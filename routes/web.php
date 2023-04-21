@@ -13,6 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+require __DIR__ . '/auth.php';
+
+// Route::get('/', function () {
+//     return view('pages.auth.login');
+// });
+
 Route::get('/', function () {
-    return view('pages.dashboard');
+    if (Auth::user()) {
+        return redirect()->route('dashboard');
+    }
+    return view('pages.auth.login');
 });
+
+Route::get('/dashboard', function () {
+    return view('pages.dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');

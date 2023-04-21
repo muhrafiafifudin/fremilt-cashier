@@ -57,8 +57,8 @@
                                     <!--end::Avatar-->
                                     <!--begin::Username-->
                                     <div class="d-flex flex-column">
-                                        <div class="fw-bolder d-flex align-items-center fs-5">Example</div>
-                                        <a href="#" class="fw-bold text-muted text-hover-primary fs-7">example@kt.com</a>
+                                        <div class="fw-bolder d-flex align-items-center fs-5">{{ Auth::user()->name }}</div>
+                                        <div class="fw-bold text-muted fs-7">{{ Auth::user()->email }}</div>
                                     </div>
                                     <!--end::Username-->
                                 </div>
@@ -69,7 +69,11 @@
                             <!--end::Menu separator-->
                             <!--begin::Menu item-->
                             <div class="menu-item px-5">
-                                <a href="authentication/flows/basic/sign-in.html" class="menu-link px-5">Sign Out</a>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+
+                                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit()" class="menu-link px-5">Sign Out</a>
+                                </form>
                             </div>
                             <!--end::Menu item-->
                         </div>
