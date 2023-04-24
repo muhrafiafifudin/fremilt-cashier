@@ -29,3 +29,28 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('pages.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::group(['middleware' => 'auth'], function () {
+    // Dashboard
+    Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
+    // Employee
+    Route::group(['prefix' => 'karyawan', 'as' => 'employee.'], function () {
+        Route::get('/', 'App\Http\Controllers\Main\EmployeeController@index')->name('index');
+    });
+    // Category
+    Route::group(['prefix' => 'kategori', 'as' => 'category.'], function () {
+        Route::get('/', 'App\Http\Controllers\Main\CategoryController@index')->name('index');
+    });
+    // Product
+    Route::group(['prefix' => 'produk', 'as' => 'product.'], function () {
+        Route::get('/', 'App\Http\Controllers\Main\ProductController@index')->name('index');
+    });
+    // Transaction
+    Route::group(['prefix' => 'transaksi', 'as' => 'transaction.'], function () {
+        Route::get('/', 'App\Http\Controllers\Transaction\TransactionController@index')->name('index');
+    });
+    // Report
+    Route::group(['prefix' => 'laporan', 'as' => 'report.'], function () {
+        Route::get('/', 'App\Http\Controllers\Report\ReportController@index')->name('index');
+    });
+});
