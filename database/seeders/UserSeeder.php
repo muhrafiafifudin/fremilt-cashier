@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
+use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UserSeeder extends Seeder
@@ -15,10 +16,22 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
+        $user = User::create([
             'name' => 'User',
             'email' => 'user@example.com',
-            'password' => bcrypt('12345678')
+            'password' => bcrypt('password'),
+            'created_at' => Carbon::now()
         ]);
+
+        $user->assignRole('user');
+
+        $admin = User::create([
+            'name' => 'Admin',
+            'email' => 'admin@example.com',
+            'password' => bcrypt('password'),
+            'created_at' => Carbon::now()
+        ]);
+
+        $admin->assignRole('admin');
     }
 }
