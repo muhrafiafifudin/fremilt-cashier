@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
         $user = User::create([
             'name' => 'User',
             'email' => 'user@example.com',
-            'password' => bcrypt('password'),
+            'password' => bcrypt('12345678'),
             'created_at' => Carbon::now()
         ]);
 
@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
         $admin = User::create([
             'name' => 'Admin',
             'email' => 'admin@example.com',
-            'password' => bcrypt('password'),
+            'password' => bcrypt('12345678'),
             'created_at' => Carbon::now()
         ]);
 
