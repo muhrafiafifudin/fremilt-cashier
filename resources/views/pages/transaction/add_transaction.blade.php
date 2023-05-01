@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Transaksi
+    Tambah Transaksi
 @endsection
 
 @section('content')
@@ -18,7 +18,7 @@
                         <span class="h-20px border-gray-200 border-start ms-3 mx-2"></span>
                         <!--end::Separator-->
                         <!--begin::Description-->
-                        <small class="text-muted fs-7 fw-bold my-1 ms-1">Halaman Utama</small>
+                        <small class="text-muted fs-7 fw-bold my-1 ms-1">Halaman Tambah Transaksi</small>
                         <!--end::Description-->
                     </h1>
                     <!--end::Title-->
@@ -40,19 +40,23 @@
                             <!--begin::Header-->
                             <div class="card-header border-0 pt-5">
                                 <h3 class="card-title align-items-start flex-column">
-                                    <span class="card-label fw-bolder fs-3 mb-1">Transaksi</span>
-                                    <span class="text-muted mt-1 fw-bold fs-7">Menampilkan semua transaksi yang telah dilakukan</span>
+                                    <span class="card-label fw-bolder fs-3 mb-1">Tambah Transaksi</span>
+                                    <span class="text-muted mt-1 fw-bold fs-7">Proses transaksi dilakukan</span>
                                 </h3>
                                 <div class="card-toolbar">
-                                    <a href="{{ route('transaction.create') }}" class="btn btn-sm btn-light-primary">
-                                    <!--begin::Svg Icon | path: icons/stockholm/Communication/Add-user.svg-->
-                                    <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                            <path d="M18,8 L16,8 C15.4477153,8 15,7.55228475 15,7 C15,6.44771525 15.4477153,6 16,6 L18,6 L18,4 C18,3.44771525 18.4477153,3 19,3 C19.5522847,3 20,3.44771525 20,4 L20,6 L22,6 C22.5522847,6 23,6.44771525 23,7 C23,7.55228475 22.5522847,8 22,8 L20,8 L20,10 C20,10.5522847 19.5522847,11 19,11 C18.4477153,11 18,10.5522847 18,10 L18,8 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
-                                            <path d="M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero" />
-                                        </svg>
-                                    </span>
-                                    <!--end::Svg Icon-->Tambah Transaksi</a>
+                                    <div class="button-add">
+                                        <a href="" class="btn btn-sm btn-light-primary" data-bs-toggle="modal" data-bs-target="#modal_add_employee">
+                                            <!--begin::Svg Icon | path: icons/stockholm/Communication/Add-user.svg-->
+                                            <span class="svg-icon svg-icon-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    <path d="M18,8 L16,8 C15.4477153,8 15,7.55228475 15,7 C15,6.44771525 15.4477153,6 16,6 L18,6 L18,4 C18,3.44771525 18.4477153,3 19,3 C19.5522847,3 20,3.44771525 20,4 L20,6 L22,6 C22.5522847,6 23,6.44771525 23,7 C23,7.55228475 22.5522847,8 22,8 L20,8 L20,10 C20,10.5522847 19.5522847,11 19,11 C18.4477153,11 18,10.5522847 18,10 L18,8 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                                    <path d="M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero" />
+                                                </svg>
+                                            </span>
+                                            <!--end::Svg Icon-->
+                                            Pilih Item
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                             <!--end::Header-->
@@ -61,18 +65,20 @@
                                 <!--begin::Table container-->
                                 <div class="table-responsive">
                                     <!--begin::Table-->
-                                    <table id="transaction_table" class="table table-striped border rounded gy-5 gs-7 dataTable no-footer">
+                                    <table class="table table-striped border rounded gy-5 gs-7 dataTable no-footer">
                                         <thead>
                                             <tr class="fw-bold fs-6 text-dark">
                                                 <th>No.</th>
-                                                <th>Tanggal</th>
-                                                <th>No. Order</th>
-                                                <th>Pelanggan</th>
-                                                <th class="text-center">Total</th>
+                                                <th>Nama Item</th>
+                                                <th>Qty</th>
+                                                <th class="text-center">Harga</th>
                                                 <th class="text-center">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <tr>
+                                                <td class="text-center" colspan="5">No data available in table</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                     <!--end::Table-->
@@ -90,7 +96,3 @@
         <!--end::Post-->
     </div>
 @endsection
-
-@push('javascript')
-    <script src="{{ asset('assets/js/pages/transaction/transaction.js') }}"></script>
-@endpush

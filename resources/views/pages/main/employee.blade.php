@@ -18,7 +18,7 @@
                         <span class="h-20px border-gray-200 border-start ms-3 mx-2"></span>
                         <!--end::Separator-->
                         <!--begin::Description-->
-                        <small class="text-muted fs-7 fw-bold my-1 ms-1">Halaman Utama</small>
+                        <small class="text-muted fs-7 fw-bold my-1 ms-1">Halaman Karyawan</small>
                         <!--end::Description-->
                     </h1>
                     <!--end::Title-->
