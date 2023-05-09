@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Transaction;
 
-use App\Http\Controllers\Controller;
+use App\Models\Cart;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
@@ -24,7 +27,10 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        return view('pages.transaction.add_transaction');
+        $product = Product::all();
+        $cartItems = Cart::where('user_id', Auth::id())->get();
+
+        return view('pages.transaction.add_transaction', compact('cartItems'));
     }
 
     /**
