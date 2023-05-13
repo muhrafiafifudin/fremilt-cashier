@@ -55,3 +55,5 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/', 'App\Http\Controllers\Report\ReportController@index')->name('index');
     });
 });
+
+// Add aditional route
