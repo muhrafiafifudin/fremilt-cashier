@@ -57,3 +57,4 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 // Add aditional route
+Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
