@@ -40,6 +40,9 @@ Route::group(['middleware' => 'auth'], function () {
     // Category
     Route::group(['prefix' => 'kategori', 'as' => 'category.'], function () {
         Route::get('/', 'App\Http\Controllers\Main\CategoryController@index')->name('index');
+        Route::post('/', 'App\Http\Controllers\Main\CategoryController@store')->name('store');
+        Route::match(['put', 'patch'], '/{category}', 'App\Http\Controllers\Main\CategoryController@update')->name('update');
+        Route::delete('/{category}', 'App\Http\Controllers\Main\CategoryController@destroy')->name('destroy');
     });
     // Product
     Route::group(['prefix' => 'produk', 'as' => 'product.'], function () {
@@ -55,6 +58,3 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/', 'App\Http\Controllers\Report\ReportController@index')->name('index');
     });
 });
-
-// Add aditional route
-Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');

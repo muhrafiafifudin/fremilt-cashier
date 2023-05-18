@@ -113,8 +113,8 @@
 
                                                         <!--begin::Actions-->
                                                         <div class="text-center mt-5">
-                                                            <button type="reset" id="cancel_button" class="btn btn-white me-3" data-bs-dismiss="modal">Cancel</button>
-                                                            <button type="submit" id="submit_button" class="btn btn-primary">Simpan</button>
+                                                            <button type="reset" class="btn btn-white me-3" data-bs-dismiss="modal">Cancel</button>
+                                                            <button type="submit" class="btn btn-primary">Simpan</button>
                                                         </div>
                                                         <!--end::Actions-->
                                                     </form>
