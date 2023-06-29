@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Main;
 
-use App\Models\Category;
 use App\Models\Ingredient;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
