@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Transaksi
+    Transaksi Masuk
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
                 <!--begin::Page title-->
                 <div class="d-flex align-items-center me-3">
                     <!--begin::Title-->
-                    <h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">Transaksi
+                    <h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">Transaksi Masuk
                         <!--begin::Separator-->
                         <span class="h-20px border-gray-200 border-start ms-3 mx-2"></span>
                         <!--end::Separator-->
@@ -40,11 +40,11 @@
                             <!--begin::Header-->
                             <div class="card-header border-0 pt-5">
                                 <h3 class="card-title align-items-start flex-column">
-                                    <span class="card-label fw-bolder fs-3 mb-1">Transaksi</span>
-                                    <span class="text-muted mt-1 fw-bold fs-7">Menampilkan semua transaksi yang telah dilakukan</span>
+                                    <span class="card-label fw-bolder fs-3 mb-1">Transaksi Masuk</span>
+                                    <span class="text-muted mt-1 fw-bold fs-7">Menampilkan semua transaksi masuk yang telah dilakukan</span>
                                 </h3>
                                 <div class="card-toolbar">
-                                    <a href="{{ route('transaction.create') }}" class="btn btn-sm btn-light-primary">
+                                    <a href="{{ route('incoming-transaction.create') }}" class="btn btn-sm btn-light-primary">
                                     <!--begin::Svg Icon | path: icons/stockholm/Communication/Add-user.svg-->
                                     <span class="svg-icon svg-icon-3">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -52,7 +52,7 @@
                                             <path d="M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero" />
                                         </svg>
                                     </span>
-                                    <!--end::Svg Icon-->Tambah Transaksi</a>
+                                    <!--end::Svg Icon-->Tambah Transaksi Masuk</a>
                                 </div>
                             </div>
                             <!--end::Header-->

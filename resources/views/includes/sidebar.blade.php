@@ -3,7 +3,7 @@
     <div class="aside-logo flex-column-auto" id="kt_aside_logo">
         <!--begin::Logo-->
         <a href="index.html">
-            <img alt="Logo" src="{{ asset('assets/media/logos/logo-1.svg') }}" class="h-15px logo" />
+            <img alt="Logo" src="{{ asset('assets/media/logos/fremilt.png') }}" class="h-35px logo" />
         </a>
         <!--end::Logo-->
         <!--begin::Aside toggler-->
@@ -47,7 +47,7 @@
                 </div>
                 <div class="menu-item">
                     <div class="menu-content pt-8 pb-2">
-                        <span class="menu-section text-muted text-uppercase fs-8">Main</span>
+                        <span class="menu-section text-muted text-uppercase fs-8">Sistem</span>
                     </div>
                 </div>
                 <div class="menu-item">
@@ -67,6 +67,11 @@
                         </span>
                         <span class="menu-title">Karyawan</span>
                     </a>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-content pt-8 pb-2">
+                        <span class="menu-section text-muted text-uppercase fs-8">Main</span>
+                    </div>
                 </div>
                 <div class="menu-item">
                     <a class="menu-link {{ request()->is('kategori') ? 'active' : '' }}" href="{{ route('category.index') }}">
@@ -146,7 +151,7 @@
                     </div>
                 </div>
                 <div class="menu-item">
-                    <a class="menu-link" href="{{ route('transaction.index') }}">
+                    <a class="menu-link {{ request()->is('transaksi-masuk') ? 'active' : '' }}" href="{{ route('incoming-transaction.index') }}">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/stockholm/Layout/Layout-arrange.svg-->
                             <span class="svg-icon svg-icon-2">
@@ -160,7 +165,25 @@
                             </span>
                             <!--end::Svg Icon-->
                         </span>
-                        <span class="menu-title">Transaksi</span>
+                        <span class="menu-title">Transaksi Masuk</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a class="menu-link {{ request()->is('transaksi-keluar') ? 'active' : '' }}" href="{{ route('outgoing-transaction.index') }}">
+                        <span class="menu-icon">
+                            <!--begin::Svg Icon | path: icons/stockholm/Layout/Layout-arrange.svg-->
+                            <span class="svg-icon svg-icon-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <path d="M5.5,4 L9.5,4 C10.3284271,4 11,4.67157288 11,5.5 L11,6.5 C11,7.32842712 10.3284271,8 9.5,8 L5.5,8 C4.67157288,8 4,7.32842712 4,6.5 L4,5.5 C4,4.67157288 4.67157288,4 5.5,4 Z M14.5,16 L18.5,16 C19.3284271,16 20,16.6715729 20,17.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,17.5 C13,16.6715729 13.6715729,16 14.5,16 Z" fill="#000000" />
+                                        <path d="M5.5,10 L9.5,10 C10.3284271,10 11,10.6715729 11,11.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,11.5 C4,10.6715729 4.67157288,10 5.5,10 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,12.5 C20,13.3284271 19.3284271,14 18.5,14 L14.5,14 C13.6715729,14 13,13.3284271 13,12.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z" fill="#000000" opacity="0.3" />
+                                    </g>
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                        </span>
+                        <span class="menu-title">Transaksi Keluar</span>
                     </a>
                 </div>
                 <div class="menu-item">
@@ -168,23 +191,71 @@
                         <span class="menu-section text-muted text-uppercase fs-8">Report</span>
                     </div>
                 </div>
-                <div class="menu-item">
-                    <a class="menu-link" href="#">
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->is('laporan/user', 'laporan/bahan', 'laporan/toping', 'laporan/produk', 'laporan/transaksi-masuk', 'laporan/transaksi-keluar') ? 'show' : '' }}">
+                    <span class="menu-link {{ request()->is('laporan/user', 'laporan/bahan', 'laporan/toping', 'laporan/produk', 'laporan/transaksi-masuk', 'laporan/transaksi-keluar') ? 'active' : '' }}">
                         <span class="menu-icon">
-                            <!--begin::Svg Icon | path: icons/stockholm/Layout/Layout-arrange.svg-->
+                            <!--begin::Svg Icon | path: icons/stockholm/Communication/Group.svg-->
                             <span class="svg-icon svg-icon-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                        <rect x="0" y="0" width="24" height="24" />
-                                        <path d="M5.5,4 L9.5,4 C10.3284271,4 11,4.67157288 11,5.5 L11,6.5 C11,7.32842712 10.3284271,8 9.5,8 L5.5,8 C4.67157288,8 4,7.32842712 4,6.5 L4,5.5 C4,4.67157288 4.67157288,4 5.5,4 Z M14.5,16 L18.5,16 C19.3284271,16 20,16.6715729 20,17.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,17.5 C13,16.6715729 13.6715729,16 14.5,16 Z" fill="#000000" />
-                                        <path d="M5.5,10 L9.5,10 C10.3284271,10 11,10.6715729 11,11.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,11.5 C4,10.6715729 4.67157288,10 5.5,10 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,12.5 C20,13.3284271 19.3284271,14 18.5,14 L14.5,14 C13.6715729,14 13,13.3284271 13,12.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z" fill="#000000" opacity="0.3" />
-                                    </g>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <path d="M18,14 C16.3431458,14 15,12.6568542 15,11 C15,9.34314575 16.3431458,8 18,8 C19.6568542,8 21,9.34314575 21,11 C21,12.6568542 19.6568542,14 18,14 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                    <path d="M17.6011961,15.0006174 C21.0077043,15.0378534 23.7891749,16.7601418 23.9984937,20.4 C24.0069246,20.5466056 23.9984937,21 23.4559499,21 L19.6,21 C19.6,18.7490654 18.8562935,16.6718327 17.6011961,15.0006174 Z M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero" />
                                 </svg>
                             </span>
                             <!--end::Svg Icon-->
                         </span>
                         <span class="menu-title">Laporan</span>
-                    </a>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <div class="menu-sub menu-sub-accordion {{ request()->is('laporan/user', 'laporan/bahan', 'laporan/toping', 'laporan/produk', 'laporan/transaksi-masuk', 'laporan/transaksi-keluar') ? 'show' : '' }}">
+                        <div class="menu-item">
+                            <a class="menu-link {{ request()->is('laporan/user') ? 'active' : '' }}" href="{{ route('report.user') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Data Kasir</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link {{ request()->is('laporan/bahan') ? 'active' : '' }}" href="{{ route('report.ingredient') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Data Bahan</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link {{ request()->is('laporan/toping') ? 'active' : '' }}" href="{{ route('report.topping') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Data Toping</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link {{ request()->is('laporan/produk') ? 'active' : '' }}" href="{{ route('report.product') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Data Produk</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link {{ request()->is('laporan/transaksi-masuk') ? 'active' : '' }}" href="{{ route('report.incoming-transaction') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Data Transaksi Masuk</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link {{ request()->is('laporan/transaksi-keluar') ? 'active' : '' }}" href="{{ route('report.outgoing-transaction') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Data Transaksi Keluar</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!--end::Menu-->

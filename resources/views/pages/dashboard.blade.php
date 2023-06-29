@@ -14,12 +14,6 @@
                 <div class="d-flex align-items-center me-3">
                     <!--begin::Title-->
                     <h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">Dashboard
-                    <!--begin::Separator-->
-                    <span class="h-20px border-gray-200 border-start ms-3 mx-2"></span>
-                    <!--end::Separator-->
-                    <!--begin::Description-->
-                    <small class="text-muted fs-7 fw-bold my-1 ms-1">#XRS-45670</small>
-                    <!--end::Description--></h1>
                     <!--end::Title-->
                 </div>
                 <!--end::Page title-->
@@ -39,7 +33,7 @@
                         <div class="card card-xxl-stretch">
                             <!--begin::Header-->
                             <div class="card-header border-0 bg-danger py-5">
-                                <h3 class="card-title fw-bolder text-white">Sales Statistics</h3>
+                                <h3 class="card-title fw-bolder text-white">Statistik Keseluruhan</h3>
                                 <div class="card-toolbar">
                                     <!--begin::Menu-->
                                     <button type="button" class="btn btn-sm btn-icon btn-color-white btn-active-white btn-active-color- border-0 me-n3" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-flip="top-end">
@@ -160,7 +154,7 @@
                                                 </svg>
                                             </span>
                                             <!--end::Svg Icon-->
-                                            <a href="#" class="text-warning fw-bold fs-6">Weekly Sales</a>
+                                            <a href="#" class="text-warning fw-bold fs-6">Monitoring</a>
                                         </div>
                                         <!--end::Col-->
                                         <!--begin::Col-->
@@ -173,7 +167,7 @@
                                                 </svg>
                                             </span>
                                             <!--end::Svg Icon-->
-                                            <a href="#" class="text-primary fw-bold fs-6">New Users</a>
+                                            <a href="#" class="text-primary fw-bold fs-6">Pelanggan</a>
                                         </div>
                                         <!--end::Col-->
                                     </div>
@@ -190,7 +184,7 @@
                                                 </svg>
                                             </span>
                                             <!--end::Svg Icon-->
-                                            <a href="#" class="text-danger fw-bold fs-6 mt-2">Item Orders</a>
+                                            <a href="#" class="text-danger fw-bold fs-6 mt-2">Produk</a>
                                         </div>
                                         <!--end::Col-->
                                         <!--begin::Col-->
@@ -203,7 +197,7 @@
                                                 </svg>
                                             </span>
                                             <!--end::Svg Icon-->
-                                            <a href="#" class="text-success fw-bold fs-6 mt-2">Bug Reports</a>
+                                            <a href="#" class="text-success fw-bold fs-6 mt-2">Laporan</a>
                                         </div>
                                         <!--end::Col-->
                                     </div>
@@ -223,32 +217,15 @@
                             <!--begin::Header-->
                             <div class="card-header border-0 pt-5">
                                 <h3 class="card-title align-items-start flex-column">
-                                    <span class="card-label fw-bolder text-dark">Trends</span>
-                                    <span class="text-muted mt-1 fw-bold fs-7">Latest tech trends</span>
+                                    <span class="card-label fw-bolder text-dark">Transaksi</span>
+                                    <span class="text-muted mt-1 fw-bold fs-7">Menampilkan beberapa transaksi terakhir</span>
                                 </h3>
                             </div>
                             <!--end::Header-->
                             <!--begin::Body-->
                             <div class="card-body pt-5">
                                 <!--begin::Item-->
-                                <div class="d-flex align-items-sm-center mb-7">
-                                    <!--begin::Symbol-->
-                                    <div class="symbol symbol-50px me-5">
-                                        <span class="symbol-label">
-                                            <img src="assets/media/svg/brand-logos/plurk.svg" class="h-50 align-self-center" alt="" />
-                                        </span>
-                                    </div>
-                                    <!--end::Symbol-->
-                                    <!--begin::Section-->
-                                    <div class="d-flex align-items-center flex-row-fluid flex-wrap">
-                                        <div class="flex-grow-1 me-2">
-                                            <a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bolder">Top Authors</a>
-                                            <span class="text-muted fw-bold d-block fs-7">Mark, Rowling, Esther</span>
-                                        </div>
-                                        <span class="badge badge-light fw-bolder my-2">+82$</span>
-                                    </div>
-                                    <!--end::Section-->
-                                </div>
+
                                 <!--end::Item-->
                             </div>
                             <!--end::Body-->

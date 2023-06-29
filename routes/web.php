@@ -68,13 +68,23 @@ Route::group(['middleware' => 'auth'], function () {
         Route::match(['put', 'patch'], '/{product}', 'App\Http\Controllers\Main\ProductController@update')->name('update');
         Route::delete('/{product}', 'App\Http\Controllers\Main\ProductController@destroy')->name('destroy');
     });
-    // Transaction
-    Route::group(['prefix' => 'transaksi', 'as' => 'transaction.'], function () {
-        Route::get('/', 'App\Http\Controllers\Transaction\TransactionController@index')->name('index');
-        Route::get('/tambah-transaksi', 'App\Http\Controllers\Transaction\TransactionController@create')->name('create');
+    // Incoming Transaction
+    Route::group(['prefix' => 'transaksi-masuk', 'as' => 'incoming-transaction.'], function () {
+        Route::get('/', 'App\Http\Controllers\Transaction\IncomingTransactionController@index')->name('index');
+        Route::get('/tambah-transaksi', 'App\Http\Controllers\Transaction\IncomingTransactionController@create')->name('create');
+    });
+    // Outgoing Transaction
+    Route::group(['prefix' => 'transaksi-keluar', 'as' => 'outgoing-transaction.'], function () {
+        Route::get('/', 'App\Http\Controllers\Transaction\OutgoingTransactionController@index')->name('index');
+        Route::get('/tambah-transaksi', 'App\Http\Controllers\Transaction\OutgoingTransactionController@create')->name('create');
     });
     // Report
     Route::group(['prefix' => 'laporan', 'as' => 'report.'], function () {
-        Route::get('/', 'App\Http\Controllers\Report\ReportController@index')->name('index');
+        Route::get('/user', 'App\Http\Controllers\Report\ReportController@user_report')->name('user');
+        Route::get('/bahan', 'App\Http\Controllers\Report\ReportController@ingredient_report')->name('ingredient');
+        Route::get('/toping', 'App\Http\Controllers\Report\ReportController@topping_report')->name('topping');
+        Route::get('/produk', 'App\Http\Controllers\Report\ReportController@product_report')->name('product');
+        Route::get('/transaksi-masuk', 'App\Http\Controllers\Report\ReportController@incoming_transaction_report')->name('incoming-transaction');
+        Route::get('/transaksi-keluar', 'App\Http\Controllers\Report\ReportController@outgoing_transaction_report')->name('outgoing-transaction');
     });
 });
