@@ -35,10 +35,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
     // Employee
     Route::group(['prefix' => 'karyawan', 'as' => 'user.'], function () {
-        Route::get('/', 'App\Http\Controllers\Main\UserController@index')->name('index');
-        Route::post('/', 'App\Http\Controllers\Main\UserController@store')->name('store');
-        Route::match(['put', 'patch'], '/{user}', 'App\Http\Controllers\Main\UserController@update')->name('update');
-        Route::delete('/{user}', 'App\Http\Controllers\Main\UserController@destroy')->name('destroy');
+        Route::get('/', 'App\Http\Controllers\System\UserController@index')->name('index');
+        Route::post('/', 'App\Http\Controllers\System\UserController@store')->name('store');
+        Route::match(['put', 'patch'], '/{user}', 'App\Http\Controllers\System\UserController@update')->name('update');
+        Route::delete('/{user}', 'App\Http\Controllers\System\UserController@destroy')->name('destroy');
     });
     // Category
     Route::group(['prefix' => 'kategori', 'as' => 'category.'], function () {
@@ -80,11 +80,23 @@ Route::group(['middleware' => 'auth'], function () {
     });
     // Report
     Route::group(['prefix' => 'laporan', 'as' => 'report.'], function () {
+        // User
         Route::get('/user', 'App\Http\Controllers\Report\ReportController@user_report')->name('user');
+        Route::get('/print-user', 'App\Http\Controllers\Report\ReportController@pdf_user_report')->name('user-pdf');
+        // Ingredient
         Route::get('/bahan', 'App\Http\Controllers\Report\ReportController@ingredient_report')->name('ingredient');
+        Route::get('/print-bahan', 'App\Http\Controllers\Report\ReportController@pdf_ingredient_report')->name('ingredient-pdf');
+        // Topping
         Route::get('/toping', 'App\Http\Controllers\Report\ReportController@topping_report')->name('topping');
+        Route::get('/print-toping', 'App\Http\Controllers\Report\ReportController@pdf_topping_report')->name('topping-pdf');
+        // Product
         Route::get('/produk', 'App\Http\Controllers\Report\ReportController@product_report')->name('product');
+        Route::get('/print-produk', 'App\Http\Controllers\Report\ReportController@pdf_product_report')->name('product-pdf');
+        // Incoming Transaction
         Route::get('/transaksi-masuk', 'App\Http\Controllers\Report\ReportController@incoming_transaction_report')->name('incoming-transaction');
+        Route::get('/print-transaksi-masuk/{fromDate}/{toDate}', 'App\Http\Controllers\Report\ReportController@pdf_incoming_transaction_report')->name('incoming-transaction-pdf');
+        // Outgoing Transaction
         Route::get('/transaksi-keluar', 'App\Http\Controllers\Report\ReportController@outgoing_transaction_report')->name('outgoing-transaction');
+        Route::get('/print-transaksi-keluar/{fromDate}/{toDate}', 'App\Http\Controllers\Report\ReportController@pdf_outgoing_transaction_report')->name('incoming-transaction-pdf');
     });
 });

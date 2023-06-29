@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Topping extends Model
 {
     use HasFactory;
+
+    protected $table = 'toppings';
+
+    protected $guarded = [];
 }

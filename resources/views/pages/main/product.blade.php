@@ -196,7 +196,7 @@
                                                             @csrf
                                                             @method('DELETE')
 
-                                                            <a href="#" class="btn btn-icon btn-active-color-primary btn-sm me-1" title="Edit" data-bs-toggle="modal" data-bs-target="#modal_edit_product_{{ $product->id }}" >
+                                                            <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Edit" data-bs-toggle="modal" data-bs-target="#modal_edit_product_{{ $product->id }}" >
                                                                 <!--begin::Svg Icon | path: icons/stockholm/Communication/Write.svg-->
                                                                 <span class="svg-icon svg-icon-3">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -206,7 +206,7 @@
                                                                 </span>
                                                                 <!--end::Svg Icon-->
                                                             </a>
-                                                            <button type="button" class="btn btn-icon btn-active-color-primary btn-sm delete-data" title="Hapus">
+                                                            <button type="button" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm delete-data" title="Hapus">
                                                                 <!--begin::Svg Icon | path: icons/stockholm/General/Trash.svg-->
                                                                 <span class="svg-icon svg-icon-3">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">

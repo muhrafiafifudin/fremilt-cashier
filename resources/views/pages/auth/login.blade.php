@@ -10,7 +10,7 @@
         <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
             <!--begin::Logo-->
             <a href="index.html" class="mb-12">
-                <img alt="Logo" src="{{ asset('assets/media/logos/logo-2-dark.svg') }}" class="h-45px" />
+                <img alt="Logo" src="{{ asset('assets/media/logos/fremilt.png') }}" class="h-60px" />
             </a>
             <!--end::Logo-->
             <!--begin::Wrapper-->
@@ -23,11 +23,12 @@
                     <!--begin::Heading-->
                     <div class="text-center mb-10">
                         <!--begin::Title-->
-                        <h1 class="text-dark mb-3">Sign In to Metronic</h1>
+                        <h1 class="text-dark mb-3">MASUK ADMIN</h1>
                         <!--end::Title-->
                         <!--begin::Link-->
-                        <div class="text-gray-400 fw-bold fs-4">New Here?
-                        <a href="authentication/flows/basic/sign-up.html" class="link-primary fw-bolder">Create an Account</a></div>
+                        <div class="text-gray-400 fw-bold fs-4">
+                            Silahkan login untuk melanjutkan
+                        </div>
                         <!--end::Link-->
                     </div>
                     <!--begin::Heading-->
@@ -87,7 +88,7 @@
                     <div class="text-center">
                         <!--begin::Submit button-->
                         <button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-primary fw-bolder me-3 my-2">
-                            <span class="indicator-label">Sign In</span>
+                            <span class="indicator-label">Masuk</span>
                             <span class="indicator-progress">Silahkan tunggu...
                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                         </button>
@@ -100,16 +101,5 @@
             <!--end::Wrapper-->
         </div>
         <!--end::Content-->
-        <!--begin::Footer-->
-        <div class="d-flex flex-center flex-column-auto p-10">
-            <!--begin::Links-->
-            <div class="d-flex align-items-center fw-bold fs-6">
-                <a href="https://keenthemes.com/faqs" class="text-muted text-hover-primary px-2">About</a>
-                <a href="mailto:support@keenthemes.com" class="text-muted text-hover-primary px-2">Contact</a>
-                <a href="https://1.envato.market/EA4JP" class="text-muted text-hover-primary px-2">Contact Us</a>
-            </div>
-            <!--end::Links-->
-        </div>
-        <!--end::Footer-->
     </div>
 @endsection
