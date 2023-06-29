@@ -18,13 +18,11 @@ class CategorySeeder extends Seeder
     {
         DB::table('categories')->insert([
             [
-                'name' => 'Coffee',
-                'slug' => 'coffee',
+                'category' => 'Coffee',
                 'created_at' => Carbon::now()
             ],
             [
-                'name' => 'Non Coffee',
-                'slug' => 'non-coffee',
+                'category' => 'Non Coffee',
                 'created_at' => Carbon::now()
             ]
         ]);
