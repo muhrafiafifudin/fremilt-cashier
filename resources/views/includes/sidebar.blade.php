@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div class="menu-item">
-                    <a class="menu-link {{ request()->is('karyawan') ? 'active' : '' }}" href="{{ route('employee.index') }}">
+                    <a class="menu-link {{ request()->is('karyawan') ? 'active' : '' }}" href="{{ route('user.index') }}">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/stockholm/Layout/Layout-arrange.svg-->
                             <span class="svg-icon svg-icon-2">

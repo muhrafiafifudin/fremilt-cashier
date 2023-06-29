@@ -147,15 +147,15 @@
                                         </thead>
                                         <tbody>
                                             @php $no = 1; @endphp
-                                            @foreach ($employees as $employee)
+                                            @foreach ($users as $user)
                                                 <tr>
                                                     <td>{{ $no++ }}</td>
-                                                    <td>{{ $employee->name }}</td>
+                                                    <td>{{ $user->name }}</td>
                                                     <td class="text-center">
                                                         <span class="badge badge-success">Active</span>
                                                     </td>
                                                     <td class="text-center">
-                                                        <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Edit" data-bs-toggle="modal" data-bs-target="#modal_edit_karyawan_{{ $employee->id }}" >
+                                                        <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Edit" data-bs-toggle="modal" data-bs-target="#modal_edit_karyawan_{{ $user->id }}" >
                                                             <!--begin::Svg Icon | path: icons/stockholm/Communication/Write.svg-->
                                                             <span class="svg-icon svg-icon-3">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">

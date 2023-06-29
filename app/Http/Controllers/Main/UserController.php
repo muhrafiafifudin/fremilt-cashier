@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class EmployeeController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,9 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = User::all();
+        $users = User::all();
 
-        return view('pages.main.employee', compact('employees'));
+        return view('pages.main.user', compact('users'));
     }
 
     /**
