@@ -16,14 +16,38 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::create([
-            'name' => 'User',
-            'email' => 'user@example.com',
-            'password' => bcrypt('12345678'),
-            'created_at' => Carbon::now()
-        ]);
+        $users = [
+            [
+                'name' => 'Annisa',
+                'email' => 'annisa@gmail.com',
+            ],
+            [
+                'name' => 'Rama',
+                'email' => 'rama@gmail.com',
+            ],
+            [
+                'name' => 'Farhan',
+                'email' => 'farhan@gmail.com',
+            ],
+            [
+                'name' => 'Citra',
+                'email' => 'citra@gmail.com',
+            ],
+            [
+                'name' => 'Dafa',
+                'email' => 'dafa@gmail.com',
+            ],
+        ];
 
-        $user->assignRole('user');
+        foreach ($users as $user) {
+            $user = User::create([
+                'name' => $user['name'],
+                'email' => $user['email'],
+                'created_at' => Carbon::now()
+            ]);
+
+            $user->assignRole('user');
+        }
 
         $admin = User::create([
             'name' => 'Admin',

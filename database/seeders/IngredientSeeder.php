@@ -19,22 +19,27 @@ class IngredientSeeder extends Seeder
         DB::table('ingredients')->insert([
             [
                 'ingredient' => 'Carnation',
+                'stock' => 5,
                 'created_at' => Carbon::now()
             ],
             [
                 'ingredient' => 'Bubuk Coklat',
+                'stock' => 5,
                 'created_at' => Carbon::now()
             ],
             [
                 'ingredient' => 'Bubuk Coffe',
+                'stock' => 5,
                 'created_at' => Carbon::now()
             ],
             [
                 'ingredient' => 'Cremer',
+                'stock' => 5,
                 'created_at' => Carbon::now()
             ],
             [
                 'ingredient' => 'Air Mendidih',
+                'stock' => 5,
                 'created_at' => Carbon::now()
             ],
         ]);

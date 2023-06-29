@@ -19,7 +19,7 @@ class ProductSeeder extends Seeder
         DB::table('products')->insert([
             [
                 'product' => 'Black Coffee',
-                'image' => 'black-coffee.jpg',
+                'image' => 'black-coffee.png',
                 'category_id' => 1,
                 'price' => 6000,
                 'description' => '',
@@ -28,7 +28,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'product' => 'Kopi Tarik Caramel',
-                'image' => 'kopi-tarik-caramel.jpg',
+                'image' => 'kopi-tarik-caramel.png',
                 'category_id' => 1,
                 'price' => 12000,
                 'description' => '',
@@ -37,7 +37,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'product' => 'Kopi Tarik',
-                'image' => 'kopi-tarik.jpg',
+                'image' => 'kopi-tarik.png',
                 'category_id' => 1,
                 'price' => 10000,
                 'description' => '',
@@ -46,7 +46,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'product' => 'Kopi Tarik Hazelnut',
-                'image' => 'kopi-tarik-hazelnut.jpg',
+                'image' => 'kopi-tarik-hazelnut.png',
                 'category_id' => 1,
                 'price' => 12000,
                 'description' => '',
@@ -55,7 +55,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'product' => 'Coffee Latte',
-                'image' => 'coffe-latte.jpg',
+                'image' => 'coffee-latte.png',
                 'category_id' => 1,
                 'price' => 11000,
                 'description' => '',
@@ -64,7 +64,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'product' => 'Choco Banana',
-                'image' => 'choco-banana.jpg',
+                'image' => 'choco-banana.png',
                 'category_id' => 2,
                 'price' => 11000,
                 'description' => '',
@@ -73,7 +73,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'product' => 'Boba Brown Sugar',
-                'image' => 'boba-brown-sugar.jpg',
+                'image' => 'boba-brown-sugar.png',
                 'category_id' => 2,
                 'price' => 13000,
                 'description' => '',
@@ -82,7 +82,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'product' => 'Thai Cocoa',
-                'image' => 'thai-cocoa.jpg',
+                'image' => 'thai-cocoa.png',
                 'category_id' => 2,
                 'price' => 11000,
                 'description' => '',
@@ -91,7 +91,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'product' => 'Cookies Oreo',
-                'image' => 'cookies-oreo.jpg',
+                'image' => 'cookies-oreo.png',
                 'category_id' => 2,
                 'price' => 13000,
                 'description' => '',
@@ -100,7 +100,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'product' => 'Black Choco',
-                'image' => 'black-choco.jpg',
+                'image' => 'black-choco.png',
                 'category_id' => 2,
                 'price' => 11000,
                 'description' => '',
@@ -109,7 +109,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'product' => 'Red Velvet',
-                'image' => 'red-velvet.jpg',
+                'image' => 'red-velvet.png',
                 'category_id' => 2,
                 'price' => 11000,
                 'description' => '',
@@ -118,7 +118,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'product' => 'Taro',
-                'image' => 'taro.jpg',
+                'image' => 'taro.png',
                 'category_id' => 2,
                 'price' => 11000,
                 'description' => '',
@@ -127,7 +127,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'product' => 'Black Tea',
-                'image' => 'black-tea.jpg',
+                'image' => 'black-tea.png',
                 'category_id' => 2,
                 'price' => 6000,
                 'description' => '',
@@ -136,7 +136,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'product' => 'Original Thai Tea',
-                'image' => 'original-thai-tea.jpg',
+                'image' => 'original-thai-tea.png',
                 'category_id' => 2,
                 'price' => 10000,
                 'description' => '',
@@ -145,7 +145,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'product' => 'Thai Greentea',
-                'image' => 'thai-greentea.jpg',
+                'image' => 'thai-greentea.png',
                 'category_id' => 2,
                 'price' => 10000,
                 'description' => '',
@@ -154,7 +154,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'product' => 'Pure Greentea',
-                'image' => 'pure-greentea.jpg',
+                'image' => 'pure-greentea.png',
                 'category_id' => 2,
                 'price' => 6000,
                 'description' => '',

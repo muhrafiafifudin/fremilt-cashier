@@ -22,7 +22,7 @@ class ProductController extends Controller
     {
         try {
             $image = $request->file('image');
-            $image->move('assets/media/image', $image->getClientOriginalName());
+            $image->move('assets/media/product', $image->getClientOriginalName());
 
             $image_url = $image->getClientOriginalName();
 
@@ -52,7 +52,7 @@ class ProductController extends Controller
 
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
-                $image->move('assets/media/image', $image->getClientOriginalName());
+                $image->move('assets/media/product', $image->getClientOriginalName());
 
                 $image_url = $image->getClientOriginalName();
 

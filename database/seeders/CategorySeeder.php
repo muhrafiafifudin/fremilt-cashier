@@ -19,10 +19,12 @@ class CategorySeeder extends Seeder
         DB::table('categories')->insert([
             [
                 'category' => 'Coffee',
+                'stock' => 5,
                 'created_at' => Carbon::now()
             ],
             [
                 'category' => 'Non Coffee',
+                'stock' => 11,
                 'created_at' => Carbon::now()
             ]
         ]);

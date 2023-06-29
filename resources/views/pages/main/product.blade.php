@@ -186,7 +186,7 @@
                                                 <tr>
                                                     <td>{{ $no++ }}</td>
                                                     <td>
-                                                        <img src="{{ asset('assets/media/image/' . $product->image) }}" alt="{{ $product->product }}" width="150px">
+                                                        <img src="{{ asset('assets/media/product/' . $product->image) }}" alt="{{ $product->product }}" width="100px">
                                                     </td>
                                                     <td>{{ $product->product }}</td>
                                                     <td class="text-center">Rp. {{ number_format($product->price, 2, ',', '.') }}</td>

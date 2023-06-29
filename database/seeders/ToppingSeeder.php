@@ -18,11 +18,23 @@ class ToppingSeeder extends Seeder
     {
         DB::table('toppings')->insert([
             [
-                'topping' => 'Chessy',
+                'topping' => 'Cheesefoam',
+                'stock' => 5,
+                'created_at' => Carbon::now()
+            ],
+            [
+                'topping' => 'Grass Jelly',
+                'stock' => 5,
                 'created_at' => Carbon::now()
             ],
             [
                 'topping' => 'Boba',
+                'stock' => 5,
+                'created_at' => Carbon::now()
+            ],
+            [
+                'topping' => 'Coffee Jelly',
+                'stock' => 5,
                 'created_at' => Carbon::now()
             ]
         ]);
