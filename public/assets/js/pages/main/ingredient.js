@@ -1,0 +1,1 @@
+$("#ingredient_table").DataTable();

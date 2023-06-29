@@ -47,6 +47,13 @@ Route::group(['middleware' => 'auth'], function () {
         Route::match(['put', 'patch'], '/{category}', 'App\Http\Controllers\Main\CategoryController@update')->name('update');
         Route::delete('/{category}', 'App\Http\Controllers\Main\CategoryController@destroy')->name('destroy');
     });
+    // Ingredient
+    Route::group(['prefix' => 'bahan', 'as' => 'ingredient.'], function () {
+        Route::get('/', 'App\Http\Controllers\Main\IngredientController@index')->name('index');
+        Route::post('/', 'App\Http\Controllers\Main\IngredientController@store')->name('store');
+        Route::match(['put', 'patch'], '/{ingredient}', 'App\Http\Controllers\Main\IngredientController@update')->name('update');
+        Route::delete('/{ingredient}', 'App\Http\Controllers\Main\IngredientController@destroy')->name('destroy');
+    });
     // Product
     Route::group(['prefix' => 'produk', 'as' => 'product.'], function () {
         Route::get('/', 'App\Http\Controllers\Main\ProductController@index')->name('index');

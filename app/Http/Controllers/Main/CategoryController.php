@@ -19,9 +19,9 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         try {
-            $user = new Category();
-            $user->category = $request->category;
-            $user->save();
+            $category = new Category();
+            $category->category = $request->category;
+            $category->save();
 
             return redirect()->route('category.index')->with('success', 'Berhasil Menambahkan Data !!');
         } catch (\Throwable $th) {
@@ -35,9 +35,9 @@ class CategoryController extends Controller
         try {
             $id = Crypt::decrypt($id);
 
-            $user = Category::findOrFail($id);
-            $user->category = $request->category;
-            $user->update();
+            $category = Category::findOrFail($id);
+            $category->category = $request->category;
+            $category->update();
 
             return redirect()->route('category.index')->with('success', 'Berhasil Mengubah Data !!');
         } catch (\Throwable $th) {
@@ -50,8 +50,8 @@ class CategoryController extends Controller
         try {
             $id = Crypt::decrypt($id);
 
-            $categories = Category::findOrFail($id);
-            $categories->delete();
+            $category = Category::findOrFail($id);
+            $category->delete();
 
             return redirect()->route('category.index')->with('success', 'Berhasil Menghapus Data !!');
         } catch (\Throwable $th) {
