@@ -92,7 +92,7 @@
                                                 <!--begin::Scroll-->
                                                 <div class="scroll-y me-n7 pe-7" id="kt_modal_new_target_form" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_new_address_header" data-kt-scroll-wrappers="#kt_modal_new_address_scroll" data-kt-scroll-offset="300px">
                                                     <!--begin:Form-->
-                                                    <form class="form" action="#" method="POST" enctype="multipart/form-data">
+                                                    <form class="form" action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
                                                         @csrf
                                                         @method('POST')
 
@@ -113,8 +113,8 @@
                                                         <!--begin::Input group-->
                                                         <div class="d-flex flex-column mb-5 fv-row">
                                                             <label class="d-flex align-items-center fs-6 fw-bold mb-2">Kategori</label>
-                                                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih Kategori" name="item_id">
-                                                                <option value="">Pilih Barang</option>
+                                                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih Kategori" name="category_id">
+                                                                <option value="">Pilih Kategori</option>
 
                                                                 @foreach ($categories as $category)
                                                                     <option value="{{ $category->id }}">{{ $category->category }}</option>
@@ -185,12 +185,14 @@
                                             @foreach ($products as $product)
                                                 <tr>
                                                     <td>{{ $no++ }}</td>
-                                                    <td><img src="" alt=""></td>
+                                                    <td>
+                                                        <img src="{{ asset('assets/media/image/' . $product->image) }}" alt="{{ $product->product }}" width="150px">
+                                                    </td>
                                                     <td>{{ $product->product }}</td>
                                                     <td class="text-center">Rp. {{ number_format($product->price, 2, ',', '.') }}</td>
                                                     <td class="text-center">{{ $product->stock }}</td>
                                                     <td class="text-center">
-                                                        <form action="#" method="POST">
+                                                        <form action="{{ route('product.destroy', \Crypt::encrypt($product->id)) }}" method="POST">
                                                             @csrf
                                                             @method('DELETE')
 
@@ -204,7 +206,7 @@
                                                                 </span>
                                                                 <!--end::Svg Icon-->
                                                             </a>
-                                                            <button type="submit" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" title="Hapus">
+                                                            <button type="button" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm delete-data" title="Hapus">
                                                                 <!--begin::Svg Icon | path: icons/stockholm/General/Trash.svg-->
                                                                 <span class="svg-icon svg-icon-3">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -261,7 +263,7 @@
                                                         <!--begin::Scroll-->
                                                         <div class="scroll-y me-n7 pe-7" id="kt_modal_new_target_form" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_new_address_header" data-kt-scroll-wrappers="#kt_modal_new_address_scroll" data-kt-scroll-offset="300px">
                                                             <!--begin:Form-->
-                                                            <form class="form" action="#" method="POST">
+                                                            <form class="form" action="{{ route('product.update', \Crypt::encrypt($product->id)) }}" method="POST">
                                                                 @csrf
                                                                 @method('PUT')
 
@@ -275,18 +277,18 @@
                                                                 <!--begin::Input group-->
                                                                 <div class="d-flex flex-column mb-5 fv-row">
                                                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">Nama Produk</label>
-                                                                    <input type="text" class="form-control form-control-solid" name="product" {{ $product->product }}/>
+                                                                    <input type="text" class="form-control form-control-solid" name="product" value="{{ $product->product }}" />
                                                                 </div>
                                                                 <!--end::Input group-->
 
                                                                 <!--begin::Input group-->
                                                                 <div class="d-flex flex-column mb-5 fv-row">
                                                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">Kategori</label>
-                                                                    <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih Kategori" name="item_id">
-                                                                        <option value="">Pilih Barang</option>
+                                                                    <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih Kategori" name="category_id">
+                                                                        <option value="">Pilih Kategori</option>
 
                                                                         @foreach ($categories as $category)
-                                                                            <option value="{{ $category->id }}" {{ $category->id == $product->id ? 'selected' : '' }}>{{ $category->category }}</option>
+                                                                            <option value="{{ $category->id }}" {{ $category->id == $product->category_id ? 'selected' : '' }}>{{ $category->category }}</option>
                                                                         @endforeach
                                                                     </select>
                                                                 </div>
@@ -295,21 +297,21 @@
                                                                 <!--begin::Input group-->
                                                                 <div class="d-flex flex-column mb-5 fv-row">
                                                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">Harga</label>
-                                                                    <input type="text" class="form-control form-control-solid" name="price" {{ $product->price }}/>
+                                                                    <input type="text" class="form-control form-control-solid" name="price" value="{{ $product->price }}"/>
                                                                 </div>
                                                                 <!--end::Input group-->
 
                                                                 <!--begin::Input group-->
                                                                 <div class="d-flex flex-column mb-5 fv-row">
                                                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">Total Produk</label>
-                                                                    <input type="text" class="form-control form-control-solid" name="stock" {{ $product->stock }}/>
+                                                                    <input type="text" class="form-control form-control-solid" name="stock" value="{{ $product->stock }}"/>
                                                                 </div>
                                                                 <!--end::Input group-->
 
                                                                 <!--begin::Input group-->
                                                                 <div class="d-flex flex-column mb-8">
                                                                     <label class="fs-6 fw-bold mb-2">Deskripsi</label>
-                                                                    <textarea class="form-control form-control-solid" rows="3" name="description" placeholder="Masukkan Deskripsi"></textarea>
+                                                                    <textarea class="form-control form-control-solid" rows="3" name="description" placeholder="Masukkan Deskripsi">{{ $product->description }}</textarea>
                                                                 </div>
                                                                 <!--end::Input group-->
 
@@ -349,4 +351,20 @@
 
 @push('javascript')
     <script src="{{ asset('assets/js/pages/main/product.js') }}"></script>
+
+    @if($message = Session::get('success'))
+        <script type="text/javascript">
+            $(document).ready(function() {
+                toastr.success("{{ $message }}");
+            })
+        </script>
+    @endif
+
+    @if ($message = Session::get('error'))
+        <script type="text/javascript">
+            $(document).ready(function() {
+                toastr.error("{{ $message }}");
+            })
+        </script>
+    @endif
 @endpush

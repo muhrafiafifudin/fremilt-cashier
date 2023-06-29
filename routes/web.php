@@ -50,6 +50,9 @@ Route::group(['middleware' => 'auth'], function () {
     // Product
     Route::group(['prefix' => 'produk', 'as' => 'product.'], function () {
         Route::get('/', 'App\Http\Controllers\Main\ProductController@index')->name('index');
+        Route::post('/', 'App\Http\Controllers\Main\ProductController@store')->name('store');
+        Route::match(['put', 'patch'], '/{product}', 'App\Http\Controllers\Main\ProductController@update')->name('update');
+        Route::delete('/{product}', 'App\Http\Controllers\Main\ProductController@destroy')->name('destroy');
     });
     // Transaction
     Route::group(['prefix' => 'transaksi', 'as' => 'transaction.'], function () {
