@@ -54,6 +54,13 @@ Route::group(['middleware' => 'auth'], function () {
         Route::match(['put', 'patch'], '/{ingredient}', 'App\Http\Controllers\Main\IngredientController@update')->name('update');
         Route::delete('/{ingredient}', 'App\Http\Controllers\Main\IngredientController@destroy')->name('destroy');
     });
+    // Topping
+    Route::group(['prefix' => 'toping', 'as' => 'topping.'], function () {
+        Route::get('/', 'App\Http\Controllers\Main\ToppingController@index')->name('index');
+        Route::post('/', 'App\Http\Controllers\Main\ToppingController@store')->name('store');
+        Route::match(['put', 'patch'], '/{topping}', 'App\Http\Controllers\Main\ToppingController@update')->name('update');
+        Route::delete('/{topping}', 'App\Http\Controllers\Main\ToppingController@destroy')->name('destroy');
+    });
     // Product
     Route::group(['prefix' => 'produk', 'as' => 'product.'], function () {
         Route::get('/', 'App\Http\Controllers\Main\ProductController@index')->name('index');
