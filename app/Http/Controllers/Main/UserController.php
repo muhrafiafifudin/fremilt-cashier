@@ -39,7 +39,7 @@ class UserController extends Controller
             $user = User::findOrFail($id);
             $user->name = $request->name;
             $user->email = $request->email;
-            $user->save();
+            $user->update();
 
             return redirect()->route('user.index')->with(['success' => 'Berhasil Mengubah Data !!']);
         } catch (\Throwable $th) {

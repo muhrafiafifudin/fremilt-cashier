@@ -9,11 +9,6 @@ use Illuminate\Support\Facades\Crypt;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $categories = Category::all();
@@ -21,73 +16,28 @@ class CategoryController extends Controller
         return view('pages.main.category', compact('categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         try {
-            $category = $request->all();
-
-            Category::create($category);
+            $user = new Category();
+            $user->category = $request->category;
+            $user->save();
 
             return redirect()->route('category.index')->with('success', 'Berhasil Menambahkan Data !!');
         } catch (\Throwable $th) {
+            dd($th);
             return redirect()->route('category.index')->with('error', 'Gagal Menambahkan Data !!');
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         try {
             $id = Crypt::decrypt($id);
 
-            $category = $request->all();
-
-            $categories = Category::findOrFail($id);
-            $categories->update($category);
+            $user = Category::findOrFail($id);
+            $user->category = $request->category;
+            $user->update();
 
             return redirect()->route('category.index')->with('success', 'Berhasil Mengubah Data !!');
         } catch (\Throwable $th) {
@@ -95,12 +45,6 @@ class CategoryController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         try {

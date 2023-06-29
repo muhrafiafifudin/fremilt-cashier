@@ -99,7 +99,7 @@
                                                         <!--begin::Input group-->
                                                         <div class="d-flex flex-column mb-5 fv-row">
                                                             <label class="d-flex align-items-center fs-6 fw-bold mb-2">Kategori</label>
-                                                            <input type="text" class="form-control form-control-solid" placeholder="Masukkan Kategori" name="name" required />
+                                                            <input type="text" class="form-control form-control-solid" placeholder="Masukkan Kategori" name="category" required />
                                                         </div>
                                                         <!--end::Input group-->
 
@@ -160,7 +160,7 @@
                                                                 <!--end::Svg Icon-->
                                                             </a>
 
-                                                            <button type="submit" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" title="Hapus">
+                                                            <button type="button" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm delete-data" title="Hapus">
                                                                 <!--begin::Svg Icon | path: icons/stockholm/General/Trash.svg-->
                                                                 <span class="svg-icon svg-icon-3">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -210,7 +210,7 @@
                                                     <div class="modal-body px-10 px-lg-15 pt-0 pb-15">
                                                         <!--begin::Heading-->
                                                         <div class="mb-10 text-center">
-                                                            <h1 class="mb-3">Edit KATEGORI</h1>
+                                                            <h1 class="mb-3">EDIT KATEGORI</h1>
                                                             <div class="text-gray-400 fw-bold fs-5">Form Untuk Mengubah Data Kategori</div>
                                                         </div>
                                                         <!--end::Heading-->
@@ -224,7 +224,7 @@
                                                                 <!--begin::Input group-->
                                                                 <div class="d-flex flex-column mb-5 fv-row">
                                                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">Kategori</label>
-                                                                    <input type="text" class="form-control form-control-solid" placeholder="Masukkan Kategori" name="name" value="{{ $data->name }}" />
+                                                                    <input type="text" class="form-control form-control-solid" placeholder="Masukkan Kategori" name="category" value="{{ $data->category }}" />
                                                                 </div>
                                                                 <!--end::Input group-->
 
