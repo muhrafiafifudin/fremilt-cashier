@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TransactionDetail extends Model
+class OutgoingTransactionPayment extends Model
 {
     use HasFactory;
 
-    protected $table = 'transaction_details';
+    protected $table = 'outgoing_transaction_payments';
 
     protected $guarded = [];
 }
