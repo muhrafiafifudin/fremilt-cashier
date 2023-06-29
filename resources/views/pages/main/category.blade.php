@@ -103,13 +103,6 @@
                                                         </div>
                                                         <!--end::Input group-->
 
-                                                        <!--begin::Input group-->
-                                                        <div class="d-flex flex-column mb-5 fv-row">
-                                                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">Slug / Url</label>
-                                                            <input type="text" class="form-control form-control-solid" placeholder="Masukkan Slug / Url" name="slug" required />
-                                                        </div>
-                                                        <!--end::Input group-->
-
                                                         <!--begin::Actions-->
                                                         <div class="text-center mt-10">
                                                             <button type="reset" class="btn btn-white me-3" data-bs-dismiss="modal">Cancel</button>
@@ -149,8 +142,8 @@
                                             @foreach ($categories as $data)
                                                 <tr>
                                                     <td>{{ $no++ }}</td>
-                                                    <td>{{ $data->name }}</td>
-                                                    <td class="text-center">{{ $data->qty }}</td>
+                                                    <td>{{ $data->category }}</td>
+                                                    <td class="text-center">{{ $data->stock }}</td>
                                                     <td class="text-center">
                                                         <form action="{{ route('category.destroy', \Crypt::encrypt($data->id)) }}" method="post">
                                                             @csrf
@@ -232,13 +225,6 @@
                                                                 <div class="d-flex flex-column mb-5 fv-row">
                                                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">Kategori</label>
                                                                     <input type="text" class="form-control form-control-solid" placeholder="Masukkan Kategori" name="name" value="{{ $data->name }}" />
-                                                                </div>
-                                                                <!--end::Input group-->
-
-                                                                <!--begin::Input group-->
-                                                                <div class="d-flex flex-column mb-5 fv-row">
-                                                                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">Slug / Url</label>
-                                                                    <input type="text" class="form-control form-control-solid" placeholder="Masukkan Slug / Url" name="slug" value="{{ $data->slug }}" />
                                                                 </div>
                                                                 <!--end::Input group-->
 
