@@ -172,9 +172,10 @@
                                     <table id="product_table" class="table table-striped border rounded gy-5 gs-7 dataTable no-footer">
                                         <thead>
                                             <tr class="fw-bold fs-6 text-dark">
-                                                <th>No.</th>
-                                                <th>Gambar</th>
-                                                <th>Nama Produk</th>
+                                                <th class="text-center">No.</th>
+                                                <th class="text-center">Gambar</th>
+                                                <th class="text-center">Kode Produk</th>
+                                                <th class="text-center">Nama Produk</th>
                                                 <th class="text-center">Harga</th>
                                                 <th class="text-center">Total Produk</th>
                                                 <th class="text-center">Aksi</th>
@@ -184,14 +185,15 @@
                                             @php $no = 1; @endphp
                                             @foreach ($products as $product)
                                                 <tr>
-                                                    <td>{{ $no++ }}</td>
-                                                    <td>
+                                                    <td align="center" valign="middle">{{ $no++ }}</td>
+                                                    <td align="center" valign="middle">
                                                         <img src="{{ asset('assets/media/product/' . $product->image) }}" alt="{{ $product->product }}" width="100px">
                                                     </td>
-                                                    <td>{{ $product->product }}</td>
-                                                    <td class="text-center">Rp. {{ number_format($product->price, 2, ',', '.') }}</td>
-                                                    <td class="text-center">{{ $product->stock }}</td>
-                                                    <td class="text-center">
+                                                    <td align="center" valign="middle">{{ $product->code }}</td>
+                                                    <td align="center" valign="middle">{{ $product->product }}</td>
+                                                    <td align="center" valign="middle">Rp. {{ number_format($product->price, 2, ',', '.') }}</td>
+                                                    <td align="center" valign="middle">{{ $product->stock }}</td>
+                                                    <td align="center" valign="middle">
                                                         <form action="{{ route('product.destroy', \Crypt::encrypt($product->id)) }}" method="POST">
                                                             @csrf
                                                             @method('DELETE')
