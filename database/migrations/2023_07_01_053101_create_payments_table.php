@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('outgoing_transaction_payments', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->string('order_number')->comment('Connection to Outgoing Transaction Table');
+            $table->string('order_number')->comment('Connection to Transaction Table');
             $table->string('order_id');
             $table->string('transaction_id');
             $table->decimal('gross_amount', 15, 2);
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('outgoing_transaction_payments');
+        Schema::dropIfExists('payments');
     }
 };

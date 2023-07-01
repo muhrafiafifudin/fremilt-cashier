@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('incoming_transactions', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->string('order_number');
             $table->integer('users_id');
             $table->string('name');
             $table->decimal('total', 15, 2);
             $table->string('note')->nullable();
+            $table->integer('type')->comment('1 = Incoming Transaction, 2 = Outgoing Transaction');
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('incoming_transactions');
+        Schema::dropIfExists('transactions');
     }
 };
