@@ -61,7 +61,7 @@
                                 <!--begin::Table container-->
                                 <div class="table-responsive">
                                     <!--begin::Table-->
-                                    <table id="transaction_table" class="table table-striped border rounded gy-5 gs-7 dataTable no-footer">
+                                    <table id="incoming_transaction_table" class="table table-striped border rounded gy-5 gs-7 dataTable no-footer">
                                         <thead>
                                             <tr class="fw-bold fs-6 text-dark">
                                                 <th>No.</th>
