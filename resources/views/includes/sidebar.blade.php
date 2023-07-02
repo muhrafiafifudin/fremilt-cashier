@@ -150,8 +150,8 @@
                         <span class="menu-section text-muted text-uppercase fs-8">Transaksi</span>
                     </div>
                 </div>
-                <div class="menu-item">
-                    <a class="menu-link {{ request()->is('transaksi-masuk') ? 'active' : '' }}" href="{{ route('incoming-transaction.index') }}">
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->is('transaksi-masuk', 'transaksi-masuk/transaksi-baru') ? 'show' : '' }}">
+                    <span class="menu-link {{ request()->is('transaksi-masuk', 'transaksi-masuk/transaksi-baru') ? 'active' : '' }}">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/stockholm/Layout/Layout-arrange.svg-->
                             <span class="svg-icon svg-icon-2">
@@ -166,10 +166,29 @@
                             <!--end::Svg Icon-->
                         </span>
                         <span class="menu-title">Transaksi Masuk</span>
-                    </a>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <div class="menu-sub menu-sub-accordion {{ request()->is('transaksi-masuk', 'transaksi-masuk/transaksi-baru') ? 'show' : '' }}">
+                        <div class="menu-item">
+                            <a class="menu-link {{ request()->is('transaksi-masuk/transaksi-baru') ? 'active' : '' }}" href="{{ route('incoming-transaction.create') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Transaksi Baru</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link {{ request()->is('transaksi-masuk') ? 'active' : '' }}" href="{{ route('incoming-transaction.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Data Transaksi</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="menu-item">
-                    <a class="menu-link {{ request()->is('transaksi-keluar') ? 'active' : '' }}" href="{{ route('outgoing-transaction.index') }}">
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->is('transaksi-keluar', 'transaksi-keluar/transaksi-baru') ? 'show' : '' }}">
+                    <span class="menu-link {{ request()->is('transaksi-keluar', 'transaksi-keluar/transaksi-baru') ? 'active' : '' }}">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/stockholm/Layout/Layout-arrange.svg-->
                             <span class="svg-icon svg-icon-2">
@@ -184,7 +203,26 @@
                             <!--end::Svg Icon-->
                         </span>
                         <span class="menu-title">Transaksi Keluar</span>
-                    </a>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <div class="menu-sub menu-sub-accordion {{ request()->is('transaksi-keluar', 'transaksi-keluar/transaksi-baru') ? 'show' : '' }}">
+                        <div class="menu-item">
+                            <a class="menu-link {{ request()->is('transaksi-keluar/transaksi-baru') ? 'active' : '' }}" href="{{ route('outgoing-transaction.create') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Transaksi Baru</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link {{ request()->is('transaksi-keluar') ? 'active' : '' }}" href="{{ route('outgoing-transaction.index') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Data Transaksi</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 <div class="menu-item">
                     <div class="menu-content pt-8 pb-2">
