@@ -71,12 +71,15 @@ Route::group(['middleware' => 'auth'], function () {
     // Incoming Transaction
     Route::group(['prefix' => 'transaksi-masuk', 'as' => 'incoming-transaction.'], function () {
         Route::get('/', 'App\Http\Controllers\Transaction\IncomingTransactionController@index')->name('index');
-        Route::get('/tambah-transaksi', 'App\Http\Controllers\Transaction\IncomingTransactionController@create')->name('create');
+        Route::get('/transaksi-baru', 'App\Http\Controllers\Transaction\IncomingTransactionController@create')->name('create');
+        Route::post('/add-product', 'App\Http\Controllers\Transaction\IncomingTransactionController@addProduct')->name('add-product');
+        Route::post('/update-product', 'App\Http\Controllers\Transaction\IncomingTransactionController@updateProduct')->name('update-product');
+        Route::post('/delete-product', 'App\Http\Controllers\Transaction\IncomingTransactionController@deleteProduct')->name('delete-product');
     });
     // Outgoing Transaction
     Route::group(['prefix' => 'transaksi-keluar', 'as' => 'outgoing-transaction.'], function () {
         Route::get('/', 'App\Http\Controllers\Transaction\OutgoingTransactionController@index')->name('index');
-        Route::get('/tambah-transaksi', 'App\Http\Controllers\Transaction\OutgoingTransactionController@create')->name('create');
+        Route::get('/transaksi-baru', 'App\Http\Controllers\Transaction\OutgoingTransactionController@create')->name('create');
     });
     // Report
     Route::group(['prefix' => 'laporan', 'as' => 'report.'], function () {

@@ -124,11 +124,11 @@
                                                                         <td align="center" valign="middle">{{ $product->stock . ' pcs' }}</td>
                                                                         <td align="center" valign="middle">
                                                                             @if ($product->stock !== 0)
-                                                                                <form action="#" method="POST">
+                                                                                <form action="{{ route('incoming-transaction.add-product') }}" method="POST">
                                                                                     @csrf
                                                                                     @method('POST')
 
-                                                                                    <input type="hidden" name="item_id" value="{{ $product->id }}">
+                                                                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
 
                                                                                     <button type="submit" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" title="Tambah">
                                                                                         <!--begin::Svg Icon | path: assets/media/icons/duotone/Interface/Plus-Square.svg-->
@@ -186,27 +186,27 @@
                                             <thead>
                                                 <tr class="fw-bold fs-6 text-dark">
                                                     <th>No.</th>
-                                                    <th>Kode Produk</th>
                                                     <th>Nama Produk</th>
                                                     <th class="text-center">Harga</th>
-                                                    <th class="text-center">Total</th>
+                                                    <th class="text-center">Qty</th>
                                                     <th class="text-center">SubTotal</th>
                                                     <th class="text-center">Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @php $no = 1; @endphp
+                                                @php $no = 1; $subTotal = 0; @endphp
                                                 @foreach ($cart_items as $cart_item)
-                                                    <tr>
+                                                    <tr class="product-data">
                                                         <td>{{ $no++ }}</td>
-                                                        <td>{{ $cart_item->product->code }}</td>
                                                         <td>{{ $cart_item->product->product }}</td>
-                                                        <td>{{ $cart_item->product->price }}</td>
-                                                        <td>
+                                                        <td align="center">Rp. {{ number_format($cart_item->product->price, 2, ',', '.') }}</td>
+                                                        <td align="center">
+                                                            <input type="hidden" class="product-id" value="{{ $cart_item->product_id }}">
+
                                                             <!--begin::Dialer-->
-                                                            <div class="position-relative w-lg-200px m-0-auto" id="kt_modal_create_project_budget_setup" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="{{ $cartItem->item->stock }}" data-kt-dialer-step="1" data-kt-dialer-suffix=" pcs">
+                                                            <div class="position-relative w-lg-200px m-0-auto" id="kt_modal_create_project_budget_setup" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="{{ $cart_item->product->stock }}" data-kt-dialer-step="1" data-kt-dialer-suffix=" pcs">
                                                                 <!--begin::Decrease control-->
-                                                                <button type="button" class="btn btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 start-0" data-kt-dialer-control="decrease">
+                                                                <button type="button" class="btn btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 start-0 lessQuantity" data-kt-dialer-control="decrease">
                                                                     <!--begin::Svg Icon | path: icons/stockholm/Code/Minus.svg-->
                                                                     <span class="svg-icon svg-icon-1">
                                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -218,10 +218,10 @@
                                                                 </button>
                                                                 <!--end::Decrease control-->
                                                                 <!--begin::Input control-->
-                                                                <input type="text" class="form-control form-control-solid border-0 text-center" data-kt-dialer-control="input" placeholder="Amount" name="product[product_qty[]]" readonly="readonly" value="{{ $cart_item->product_qty }}" />
+                                                                <input type="text" class="form-control form-control-solid border-0 text-center qty-input" data-kt-dialer-control="input" placeholder="Amount" readonly="readonly" value="{{ $cart_item->product_qty }}" />
                                                                 <!--end::Input control-->
                                                                 <!--begin::Increase control-->
-                                                                <button type="button" class="btn btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 end-0" data-kt-dialer-control="increase">
+                                                                <button type="button" class="btn btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 end-0 addQuantity" data-kt-dialer-control="increase">
                                                                     <!--begin::Svg Icon | path: icons/stockholm/Code/Plus.svg-->
                                                                     <span class="svg-icon svg-icon-1">
                                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -235,9 +235,11 @@
                                                             </div>
                                                             <!--end::Dialer-->
                                                         </td>
-                                                        <td>{{ $cart_item->product->price * $cart_item->product_qty }}</td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm delete-data" title="Hapus">
+                                                        <td align="center">Rp. {{ number_format($cart_item->product->price * $cart_item->product_qty, 2, ',', '.') }}</td>
+                                                        <td align="center">
+                                                            <input type="hidden" class="product-id" value="{{ $cart_item->product_id }}">
+
+                                                            <button type="button" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm delete-data-cart" title="Hapus">
                                                                 <!--begin::Svg Icon | path: icons/stockholm/General/Trash.svg-->
                                                                 <span class="svg-icon svg-icon-3">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -252,8 +254,19 @@
                                                             </button>
                                                         </td>
                                                     </tr>
+
+                                                    @php
+                                                        $subTotal += $cart_item->product->price * $cart_item->product_qty;
+                                                    @endphp
                                                 @endforeach
                                             </tbody>
+                                            <tfoot>
+                                                <tr class="fw-bold fs-6 text-dark">
+                                                    <th colspan="4">Total</th>
+                                                    <th class="text-center">Rp. {{ number_format($subTotal, 2, ',', '.') }}</th>
+                                                    <th></th>
+                                                </tr>
+                                            </tfoot>
                                         </table>
                                         <!--end::Table-->
                                     </div>
@@ -287,4 +300,28 @@
 
 @push('javascript')
     <script src="{{ asset('assets/js/pages/transaction/incoming_transaction.js') }}"></script>
+
+    @if($message = Session::get('success'))
+        <script type="text/javascript">
+            $(document).ready(function() {
+                toastr.success("{{ $message }}");
+            })
+        </script>
+    @endif
+
+    @if($message = Session::get('warning'))
+        <script type="text/javascript">
+            $(document).ready(function() {
+                toastr.warning("{{ $message }}");
+            })
+        </script>
+    @endif
+
+    @if ($message = Session::get('error'))
+        <script type="text/javascript">
+            $(document).ready(function() {
+                toastr.error("{{ $message }}");
+            })
+        </script>
+    @endif
 @endpush
