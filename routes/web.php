@@ -80,6 +80,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'transaksi-keluar', 'as' => 'outgoing-transaction.'], function () {
         Route::get('/', 'App\Http\Controllers\Transaction\OutgoingTransactionController@index')->name('index');
         Route::get('/transaksi-baru', 'App\Http\Controllers\Transaction\OutgoingTransactionController@create')->name('create');
+        Route::post('/add-product', 'App\Http\Controllers\Transaction\OutgoingTransactionController@addProduct')->name('add-product');
+        Route::post('/update-product', 'App\Http\Controllers\Transaction\OutgoingTransactionController@updateProduct')->name('update-product');
+        Route::post('/delete-product', 'App\Http\Controllers\Transaction\OutgoingTransactionController@deleteProduct')->name('delete-product');
     });
     // Report
     Route::group(['prefix' => 'laporan', 'as' => 'report.'], function () {
