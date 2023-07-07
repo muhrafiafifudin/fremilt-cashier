@@ -62,16 +62,16 @@
                                         </thead>
                                         <tbody>
                                             @php $no = 1; $subTotal = 0; @endphp
-                                            @foreach ($transactions as $transaction)
+                                            @foreach ($transaction as $data)
                                                 <tr class="product-data">
                                                     <td>{{ $no++ }}</td>
-                                                    <td>{{ $transaction->product->product }}</td>
-                                                    <td align="center">Rp. {{ number_format($transaction->product->price, 2, ',', '.') }}</td>
+                                                    {{-- <td>{{ $data->product->product }}</td> --}}
+                                                    {{-- <td align="center">Rp. {{ number_format($data->product->price, 2, ',', '.') }}</td> --}}
                                                     <td align="center">
-                                                        <input type="hidden" class="product-id" value="{{ $transaction->product_id }}">
+                                                        {{-- <input type="hidden" class="product-id" value="{{ $data->product_id }}"> --}}
 
                                                         <!--begin::Dialer-->
-                                                        <div class="position-relative w-lg-200px m-0-auto" id="kt_modal_create_project_budget_setup" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="{{ $transaction->product->stock }}" data-kt-dialer-step="1" data-kt-dialer-suffix=" pcs">
+                                                        <div class="position-relative w-lg-200px m-0-auto" id="kt_modal_create_project_budget_setup" data-kt-dialer="true" data-kt-dialer-min="1" data-kt-dialer-max="{{ $data->product->stock }}" data-kt-dialer-step="1" data-kt-dialer-suffix=" pcs">
                                                             <!--begin::Decrease control-->
                                                             <button type="button" class="btn btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 start-0 lessQuantity" data-kt-dialer-control="decrease">
                                                                 <!--begin::Svg Icon | path: icons/stockholm/Code/Minus.svg-->
@@ -85,7 +85,7 @@
                                                             </button>
                                                             <!--end::Decrease control-->
                                                             <!--begin::Input control-->
-                                                            <input type="text" class="form-control form-control-solid border-0 text-center qty-input" data-kt-dialer-control="input" placeholder="Amount" readonly="readonly" value="{{ $transaction->product_qty }}" />
+                                                            <input type="text" class="form-control form-control-solid border-0 text-center qty-input" data-kt-dialer-control="input" placeholder="Amount" readonly="readonly" value="{{ $data->product_qty }}" />
                                                             <!--end::Input control-->
                                                             <!--begin::Increase control-->
                                                             <button type="button" class="btn btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 end-0 addQuantity" data-kt-dialer-control="increase">
@@ -102,9 +102,9 @@
                                                         </div>
                                                         <!--end::Dialer-->
                                                     </td>
-                                                    <td align="center">Rp. {{ number_format($transaction->product->price * $transaction->product_qty, 2, ',', '.') }}</td>
+                                                    <td align="center">Rp. {{ number_format($data->product->price * $data->product_qty, 2, ',', '.') }}</td>
                                                     <td align="center">
-                                                        <input type="hidden" class="product-id" value="{{ $transaction->product_id }}">
+                                                        <input type="hidden" class="product-id" value="{{ $data->product_id }}">
 
                                                         <button type="button" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm delete-data-cart" title="Hapus">
                                                             <!--begin::Svg Icon | path: icons/stockholm/General/Trash.svg-->
@@ -123,7 +123,7 @@
                                                 </tr>
 
                                                 @php
-                                                    $subTotal += $transaction->product->price * $transaction->product_qty;
+                                                    $subTotal += $data->product->price * $data->product_qty;
                                                 @endphp
                                             @endforeach
                                         </tbody>

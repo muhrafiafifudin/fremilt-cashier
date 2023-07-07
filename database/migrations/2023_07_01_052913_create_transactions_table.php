@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->string('order_number');
-            $table->integer('users_id');
+            $table->integer('user_id');
             $table->string('name');
             $table->decimal('total', 15, 2);
             $table->string('note')->nullable();

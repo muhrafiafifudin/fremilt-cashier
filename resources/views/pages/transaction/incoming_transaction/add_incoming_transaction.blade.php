@@ -175,7 +175,7 @@
                             <!--end::Header-->
                             <!--begin::Body-->
                             <div class="card-body py-3 pt-10">
-                                <form action="#" method="POST">
+                                <form action="{{ route('incoming-transaction.store') }}" method="POST">
                                     @csrf
                                     @method('POST')
 
@@ -273,6 +273,8 @@
                                     <!--end::Table container-->
 
                                     <div class="text-center">
+                                        <input type="hidden" name="total" value="{{ $subTotal }}">
+
                                         <button type="submit" class="btn btn-sm btn-light-primary mt-10 mb-10">
                                             <!--begin::Svg Icon | path: icons/stockholm/Communication/Add-user.svg-->
                                             <span class="svg-icon svg-icon-3">

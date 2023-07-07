@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Transaction;
 
 use App\Models\Cart;
 use App\Models\Product;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
+use App\Models\TransactionDetail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,6 +23,42 @@ class IncomingTransactionController extends Controller
         $cart_items = Cart::where([['user_id', Auth::id()], ['type', 1]])->get();
 
         return view('pages.transaction.incoming_transaction.add_incoming_transaction', compact('products', 'cart_items'));
+    }
+
+    public function show($id)
+    {
+        $transaction = Transaction::findOrFail($id);
+
+        return view('pages.transaction.incoming_transaction.detail_incoming_transaction', compact('transaction'));
+    }
+
+    public function store(Request $request)
+    {
+        // dd($request->all());
+
+        $transaction = new Transaction();
+        $transaction->order_number = rand(0000000000, 9999999999);
+        $transaction->user_id = Auth::id();
+        $transaction->name = $request->name;
+        $transaction->total = $request->total;
+        $transaction->note = $request->note;
+        $transaction->type = 1;
+        $transaction->save();
+
+        $cart_items = Cart::where([['user_id', Auth::id()], ['type', 1]])->get();
+
+        foreach ($cart_items as $cart_item) {
+            $transaction_details = new TransactionDetail();
+            $transaction_details->transaction_id = $transaction->id;
+            $transaction_details->product_id = $cart_item->product_id;
+            $transaction_details->product_qty = $cart_item->product_qty;
+            $transaction_details->save();
+        }
+
+        $cart_items = Cart::where([['user_id', Auth::id()], ['type', 1]])->get();
+        Cart::destroy($cart_items);
+
+        // return view('pages.transaction.incoming_transaction.detail_incoming_transaction');
     }
 
     public function addProduct(Request $request)
