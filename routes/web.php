@@ -72,8 +72,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'transaksi-masuk', 'as' => 'incoming-transaction.'], function () {
         Route::get('/', 'App\Http\Controllers\Transaction\IncomingTransactionController@index')->name('index');
         Route::get('/transaksi-baru', 'App\Http\Controllers\Transaction\IncomingTransactionController@create')->name('create');
-        Route::get('/{incomingTransaction}', 'App\Http\Controllers\Transaction\IncomingTransactionController@show')->name('show');
+        Route::get('/transaksi-baru/{incomingTransaction}', 'App\Http\Controllers\Transaction\IncomingTransactionController@confirmTransaction')->name('confirm');
         Route::post('/', 'App\Http\Controllers\Transaction\IncomingTransactionController@store')->name('store');
+        Route::get('/{incomingTransaction}', 'App\Http\Controllers\Transaction\IncomingTransactionController@show')->name('show');
         Route::post('/add-product', 'App\Http\Controllers\Transaction\IncomingTransactionController@addProduct')->name('add-product');
         Route::post('/update-product', 'App\Http\Controllers\Transaction\IncomingTransactionController@updateProduct')->name('update-product');
         Route::post('/delete-product', 'App\Http\Controllers\Transaction\IncomingTransactionController@deleteProduct')->name('delete-product');

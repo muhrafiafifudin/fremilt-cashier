@@ -32,6 +32,15 @@ class IncomingTransactionController extends Controller
         return view('pages.transaction.incoming_transaction.detail_incoming_transaction', compact('transaction'));
     }
 
+    public function confirmTransaction($id)
+    {
+        $transaction_details = TransactionDetail::where('transaction_id', $id)->get();
+
+        // dd($transaction_details);
+
+        return view('pages.transaction.incoming_transaction.confirm_incoming_transaction', compact('transaction_details'));
+    }
+
     public function store(Request $request)
     {
         // dd($request->all());
@@ -55,12 +64,10 @@ class IncomingTransactionController extends Controller
             $transaction_details->save();
         }
 
-        $transaction_details = TransactionDetail::where('transaction_id', $transaction->id)->get();
-
         $cart_items = Cart::where([['user_id', Auth::id()], ['type', 1]])->get();
         Cart::destroy($cart_items);
 
-        return view('pages.transaction.incoming_transaction.confirm_incoming_transaction', compact('transaction', 'transaction_details'));
+        return redirect()->route('incoming-transaction.confirm', $transaction->id)->with(['success' => 'Lanjutkan untuk proses bayar !!']);
     }
 
     public function addProduct(Request $request)
