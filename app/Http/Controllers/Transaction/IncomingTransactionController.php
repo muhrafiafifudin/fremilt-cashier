@@ -55,10 +55,12 @@ class IncomingTransactionController extends Controller
             $transaction_details->save();
         }
 
+        $transaction_details = TransactionDetail::where('transaction_id', $transaction->id)->get();
+
         $cart_items = Cart::where([['user_id', Auth::id()], ['type', 1]])->get();
         Cart::destroy($cart_items);
 
-        // return view('pages.transaction.incoming_transaction.detail_incoming_transaction');
+        return view('pages.transaction.incoming_transaction.confirm_incoming_transaction', compact('transaction', 'transaction_details'));
     }
 
     public function addProduct(Request $request)
