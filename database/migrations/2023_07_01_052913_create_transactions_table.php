@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('order_number');
             $table->integer('user_id');
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->decimal('total', 15, 2);
-            $table->string('note')->nullable();
             $table->integer('type')->comment('1 = Incoming Transaction, 2 = Outgoing Transaction');
+            $table->integer('payment_type')->comment('1 = Cash, 2 = Debit')->nullable();
             $table->timestamps();
         });
     }
