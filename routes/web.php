@@ -70,11 +70,18 @@ Route::group(['middleware' => 'auth'], function () {
     });
     // Incoming Transaction
     Route::group(['prefix' => 'transaksi-masuk', 'as' => 'incoming-transaction.'], function () {
+        // All Transaction Page
         Route::get('/', 'App\Http\Controllers\Transaction\IncomingTransactionController@index')->name('index');
+        // New Transaction Page
         Route::get('/transaksi-baru', 'App\Http\Controllers\Transaction\IncomingTransactionController@create')->name('create');
         Route::get('/transaksi-baru/{incomingTransaction}', 'App\Http\Controllers\Transaction\IncomingTransactionController@confirmTransaction')->name('confirm');
-        Route::post('/', 'App\Http\Controllers\Transaction\IncomingTransactionController@store')->name('store');
+        Route::get('/pembayaran/{incomingTransaction}/{paymentType}', 'App\Http\Controllers\Transaction\IncomingTransactionController@payment')->name('payment');
+        // Detail Transaction
         Route::get('/{incomingTransaction}', 'App\Http\Controllers\Transaction\IncomingTransactionController@show')->name('show');
+        // Add & Update Transaction Data
+        Route::post('/', 'App\Http\Controllers\Transaction\IncomingTransactionController@store')->name('store');
+        Route::match(['put', 'patch'], '/{incomingTransaction}', 'App\Http\Controllers\Transaction\IncomingTransactionController@update')->name('update');
+        // Cart
         Route::post('/add-product', 'App\Http\Controllers\Transaction\IncomingTransactionController@addProduct')->name('add-product');
         Route::post('/update-product', 'App\Http\Controllers\Transaction\IncomingTransactionController@updateProduct')->name('update-product');
         Route::post('/delete-product', 'App\Http\Controllers\Transaction\IncomingTransactionController@deleteProduct')->name('delete-product');
