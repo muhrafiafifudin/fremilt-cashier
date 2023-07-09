@@ -44,9 +44,10 @@
                                     <span class="text-muted mt-1 fw-bold fs-7">Proses transaksi masuk yang akan dibayar</span>
                                 </h3>
 
-                                <form action="{{ url('transaksi-masuk/pembayaran/' . $transaction->id) }}" id="submit_form" method="POST">
+                                <form action="{{ route('incoming-transaction.add-payment') }}" id="submit_form" method="POST">
                                     @csrf
 
+                                    <input type="hidden" name="order_number" value="{{ $transaction->order_number }}">
                                     <input type="hidden" name="json" id="json_callback">
                                 </form>
                             </div>
@@ -105,10 +106,25 @@
                                             @endforeach
                                         </tbody>
                                         <tfoot>
+                                            <input type="hidden" id="total_incoming_transaction" value="{{ $subTotal }}">
+
                                             <tr class="fw-bold fs-6 text-dark">
                                                 <th colspan="4">Total</th>
                                                 <th class="text-center">Rp. {{ number_format($subTotal, 2, ',', '.') }}</th>
                                             </tr>
+
+                                            @if ($transaction->payment_type == 1)
+                                                <tr class="fw-bold fs-6 text-dark">
+                                                    <th colspan="4">Bayar</th>
+                                                    <th align="center">
+                                                        <input type="text" id="payment_incoming_transaction" name="payment" class="form-control form-control-solid text-center payment-input" />
+                                                    </th>
+                                                </tr>
+                                                <tr class="fw-bold fs-6 text-dark">
+                                                    <th colspan="4">Kembalian</th>
+                                                    <th class="text-center" id="money_change">Rp. 0,00</th>
+                                                </tr>
+                                            @endif
                                         </tfoot>
                                     </table>
                                     <!--end::Table-->
@@ -117,16 +133,24 @@
 
                                 <div class="text-center">
                                     @if ($transaction->payment_type == 1)
-                                        <button type="submit" class="btn btn-sm btn-light-primary mt-10 mb-10 me-5">
-                                            <!--begin::Svg Icon | path: icons/stockholm/Communication/Add-user.svg-->
-                                            <span class="svg-icon svg-icon-3">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                    <path d="M18,8 L16,8 C15.4477153,8 15,7.55228475 15,7 C15,6.44771525 15.4477153,6 16,6 L18,6 L18,4 C18,3.44771525 18.4477153,3 19,3 C19.5522847,3 20,3.44771525 20,4 L20,6 L22,6 C22.5522847,6 23,6.44771525 23,7 C23,7.55228475 22.5522847,8 22,8 L20,8 L20,10 C20,10.5522847 19.5522847,11 19,11 C18.4477153,11 18,10.5522847 18,10 L18,8 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
-                                                    <path d="M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero" />
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon-->Bayar Cash
-                                        </button>
+                                        <form action="{{ route('incoming-transaction.add-payment') }}" method="POST">
+                                            @csrf
+                                            @method('POST')
+
+                                            <input type="hidden" name="money_change">
+                                            <input type="hidden" name="transaction_id" value="{{ $transaction->id }}">
+
+                                            <button type="submit" class="btn btn-sm btn-light-primary mt-10 mb-10 me-5">
+                                                <!--begin::Svg Icon | path: icons/stockholm/Communication/Add-user.svg-->
+                                                <span class="svg-icon svg-icon-3">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                        <path d="M18,8 L16,8 C15.4477153,8 15,7.55228475 15,7 C15,6.44771525 15.4477153,6 16,6 L18,6 L18,4 C18,3.44771525 18.4477153,3 19,3 C19.5522847,3 20,3.44771525 20,4 L20,6 L22,6 C22.5522847,6 23,6.44771525 23,7 C23,7.55228475 22.5522847,8 22,8 L20,8 L20,10 C20,10.5522847 19.5522847,11 19,11 C18.4477153,11 18,10.5522847 18,10 L18,8 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                                        <path d="M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero" />
+                                                    </svg>
+                                                </span>
+                                                <!--end::Svg Icon-->Bayar
+                                            </button>
+                                        </form>
                                     @endif
 
                                     @if ($transaction->payment_type == 2)
@@ -138,7 +162,7 @@
                                                     <path d="M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero" />
                                                 </svg>
                                             </span>
-                                            <!--end::Svg Icon-->Bayar Debit
+                                            <!--end::Svg Icon-->Bayar
                                         </button>
                                     @endif
                                 </div>

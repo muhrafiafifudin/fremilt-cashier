@@ -76,6 +76,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/transaksi-baru', 'App\Http\Controllers\Transaction\IncomingTransactionController@create')->name('create');
         Route::get('/transaksi-baru/{incomingTransaction}', 'App\Http\Controllers\Transaction\IncomingTransactionController@confirmTransaction')->name('confirm');
         Route::get('/pembayaran/{incomingTransaction}/{paymentType}', 'App\Http\Controllers\Transaction\IncomingTransactionController@payment')->name('payment');
+        Route::post('/pembayaran', 'App\Http\Controllers\Transaction\IncomingTransactionController@paymentPost')->name('add-payment');
         // Detail Transaction
         Route::get('/{incomingTransaction}', 'App\Http\Controllers\Transaction\IncomingTransactionController@show')->name('show');
         // Add & Update Transaction Data
