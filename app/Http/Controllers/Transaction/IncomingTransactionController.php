@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Transaction;
 
 use Midtrans;
+use Carbon\Carbon;
 use App\Models\Cart;
 use App\Models\Payment;
 use App\Models\Product;
@@ -17,7 +18,9 @@ class IncomingTransactionController extends Controller
 {
     public function index()
     {
-        return view('pages.transaction.incoming_transaction.incoming_transaction');
+        $transactions = Transaction::where('type', 1)->get();
+
+        return view('pages.transaction.incoming_transaction.transaction.incoming_transaction', compact('transactions'));
     }
 
     public function create()
@@ -25,14 +28,14 @@ class IncomingTransactionController extends Controller
         $products = Product::all();
         $cart_items = Cart::where([['user_id', Auth::id()], ['type', 1]])->get();
 
-        return view('pages.transaction.incoming_transaction.add_incoming_transaction', compact('products', 'cart_items'));
+        return view('pages.transaction.incoming_transaction.new_transaction.add_incoming_transaction', compact('products', 'cart_items'));
     }
 
     public function show($id)
     {
         $transaction = Transaction::findOrFail($id);
 
-        return view('pages.transaction.incoming_transaction.detail_incoming_transaction', compact('transaction'));
+        return view('pages.transaction.incoming_transaction.new_transaction.detail_incoming_transaction', compact('transaction'));
     }
 
     public function store(Request $request)
@@ -87,7 +90,7 @@ class IncomingTransactionController extends Controller
         $transaction = Transaction::findOrFail($id);
         $transaction_details = TransactionDetail::where('transaction_id', $id)->get();
 
-        return view('pages.transaction.incoming_transaction.confirm_incoming_transaction', compact('transaction', 'transaction_details'));
+        return view('pages.transaction.incoming_transaction.new_transaction.confirm_incoming_transaction', compact('transaction', 'transaction_details'));
     }
 
     public function payment($id, $type)
@@ -129,57 +132,77 @@ class IncomingTransactionController extends Controller
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);
 
-        return view('pages.transaction.incoming_transaction.payment_incoming_transaction', compact('transaction', 'transaction_details', 'snapToken'));
+        return view('pages.transaction.incoming_transaction.new_transaction.payment_incoming_transaction', compact('transaction', 'transaction_details', 'snapToken'));
     }
 
     public function paymentPost(Request $request)
     {
-        dd($request->all());
-        $json = json_decode($request->get('json'));
+        $order_number = $request->order_number;
 
-        $payment = new Payment();
-        $payment->order_number = $request->id;
-        $payment->order_id = $json->order_id;
-        $payment->transaction_id = $json->transaction_id;
-        $payment->gross_amount = $json->gross_amount;
-        $payment->payment_type = $json->payment_type;
-        $payment->status_code = $json->status_code;
-        $payment->transaction_time = $json->transaction_time;
+        $transaction = Transaction::where('order_number', $order_number)->first();
 
-        $transaction_status = $json->transaction_status;
-        $fraud = !empty($json->fraud_status) ? $json->fraud_status : '';
-
-        if ($transaction_status == 'capture') {
-            if ($fraud == 'challenge') {
-                // TODO Set payment status in merchant's database to 'challenge'
-                $payment->transaction_status = 'pending';
-            } else if ($fraud == 'accept') {
-                // TODO Set payment status in merchant's database to 'success'
-                $payment->transaction_status = 'paid';
-            }
-        } else if ($transaction_status == 'cancel') {
-            if ($fraud == 'challenge') {
-                // TODO Set payment status in merchant's database to 'failure'
-                $payment->transaction_status = 'failed';
-            } else if ($fraud == 'accept') {
-                // TODO Set payment status in merchant's database to 'failure'
-                $payment->transaction_status = 'failed';
-            }
-        } else if ($transaction_status == 'deny') {
-            // TODO Set payment status in merchant's database to 'failure'
-            $payment->transaction_status = 'failed';
-        } else if ($transaction_status == 'settlement') {
-            // TODO set payment status in merchant's database to 'Settlement'
+        if ($transaction->payment_type == 1) {
+            $payment = new Payment();
+            $payment->order_number = $order_number;
+            $payment->gross_amount = $transaction->total;
+            $payment->payment_type = 'cash';
+            $payment->status_code = '200';
             $payment->transaction_status = 'paid';
-        } else if ($transaction_status == 'pending') {
-            // TODO set payment status in merchant's database to 'Pending'
-            $payment->transaction_status = 'pending';
-        } else if ($transaction_status == 'expire') {
-            // TODO set payment status in merchant's database to 'expire'
-            $payment->transaction_status = 'failed';
-        }
+            $payment->transaction_time = Carbon::now();
+            $payment->payment = $request->payment;
+            $payment->money_change = $request->money_change;
+            $payment->save();
 
-        return $payment->save() ? redirect()->route('incoming-transaction.index')->with('alert-success', 'Order Berhasil Dibuat') : redirect()->route('incoming-transaction.index')->with('alert-failed', 'Terjadi Kesalahan');
+            return redirect()->route('incoming-transaction.index');
+        } else {
+            $json = json_decode($request->get('json'));
+
+            $payment = new Payment();
+            $payment->order_number = $order_number;
+            $payment->order_id = $json->order_id;
+            $payment->transaction_id = $json->transaction_id;
+            $payment->gross_amount = $json->gross_amount;
+            $payment->payment_type = $json->payment_type;
+            $payment->status_code = $json->status_code;
+            $payment->transaction_time = $json->transaction_time;
+
+            $transaction_status = $json->transaction_status;
+            $fraud = !empty($json->fraud_status) ? $json->fraud_status : '';
+
+            if ($transaction_status == 'capture') {
+                if ($fraud == 'challenge') {
+                    // TODO Set payment status in merchant's database to 'challenge'
+                    $payment->transaction_status = 'pending';
+                } else if ($fraud == 'accept') {
+                    // TODO Set payment status in merchant's database to 'success'
+                    $payment->transaction_status = 'paid';
+                }
+            } else if ($transaction_status == 'cancel') {
+                if ($fraud == 'challenge') {
+                    // TODO Set payment status in merchant's database to 'failure'
+                    $payment->transaction_status = 'failed';
+                } else if ($fraud == 'accept') {
+                    // TODO Set payment status in merchant's database to 'failure'
+                    $payment->transaction_status = 'failed';
+                }
+            } else if ($transaction_status == 'deny') {
+                // TODO Set payment status in merchant's database to 'failure'
+                $payment->transaction_status = 'failed';
+            } else if ($transaction_status == 'settlement') {
+                // TODO set payment status in merchant's database to 'Settlement'
+                $payment->transaction_status = 'paid';
+            } else if ($transaction_status == 'pending') {
+                // TODO set payment status in merchant's database to 'Pending'
+                $payment->transaction_status = 'pending';
+            } else if ($transaction_status == 'expire') {
+                // TODO set payment status in merchant's database to 'expire'
+                $payment->transaction_status = 'failed';
+            }
+
+            $payment->save();
+
+            return redirect()->route('incoming-transaction.index');
+        }
     }
 
     public function addProduct(Request $request)

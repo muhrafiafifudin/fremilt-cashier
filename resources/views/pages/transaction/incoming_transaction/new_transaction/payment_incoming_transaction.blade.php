@@ -138,7 +138,7 @@
                                             @method('POST')
 
                                             <input type="hidden" name="money_change">
-                                            <input type="hidden" name="transaction_id" value="{{ $transaction->id }}">
+                                            <input type="hidden" name="order_number" value="{{ $transaction->order_number }}">
 
                                             <button type="submit" class="btn btn-sm btn-light-primary mt-10 mb-10 me-5">
                                                 <!--begin::Svg Icon | path: icons/stockholm/Communication/Add-user.svg-->

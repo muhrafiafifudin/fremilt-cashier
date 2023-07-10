@@ -17,14 +17,14 @@ return new class extends Migration
             $table->id();
             $table->string('order_number')->comment('Connection to Transaction Table');
             $table->string('order_id')->nullable();
-            $table->string('transaction_id');
+            $table->string('transaction_id')->nullable();
             $table->decimal('gross_amount', 15, 2);
             $table->string('payment_type');
             $table->string('status_code');
             $table->string('transaction_status');
             $table->string('transaction_time');
-            $table->integer('payment')->nullable();
-            $table->integer('money_change')->nullable();
+            $table->decimal('payment', 15, 2)->nullable();
+            $table->decimal('money_change', 15, 2)->nullable();
             $table->timestamps();
         });
     }
