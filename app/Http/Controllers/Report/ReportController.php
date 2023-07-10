@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Report;
 
+use PDF;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Topping;
-use PDF;
 use App\Models\Ingredient;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -73,9 +74,16 @@ class ReportController extends Controller
         return view('pages.report.incoming_transaction_report');
     }
 
-    public function pdf_incoming_transaction_report()
+    public function pdf_incoming_transaction_report($fromDate, $toDate)
     {
-        return view('pages.report.incoming_transaction_report');
+        $transactions = Transaction::whereDate('created_at', '>=', $fromDate)
+            ->whereDate('created_at', '<=', $toDate)
+            ->where('type', 1)
+            ->get();
+
+        $pdf = PDF::loadView('pages.report.pdf.incoming_transaction_report', compact('transactions'))->setPaper('a4', 'potrait');
+
+        return $pdf->download('Laporan Transaksi Masuk.pdf');
     }
 
     public function outgoing_transaction_report()
@@ -83,8 +91,15 @@ class ReportController extends Controller
         return view('pages.report.outgoing_transaction_report');
     }
 
-    public function pdf_outgoing_transaction_report()
+    public function pdf_outgoing_transaction_report($fromDate, $toDate)
     {
-        return view('pages.report.outgoing_transaction_report');
+        $transactions = Transaction::whereDate('created_at', '>=', $fromDate)
+            ->whereDate('created_at', '<=', $toDate)
+            ->where('type', 2)
+            ->get();
+
+        $pdf = PDF::loadView('pages.report.pdf.outgoing_transaction_report', compact('transactions'))->setPaper('a4', 'potrait');
+
+        return $pdf->download('Laporan Transaksi Keluar.pdf');
     }
 }

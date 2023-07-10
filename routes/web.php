@@ -125,6 +125,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/print-transaksi-masuk/{fromDate}/{toDate}', 'App\Http\Controllers\Report\ReportController@pdf_incoming_transaction_report')->name('incoming-transaction-pdf');
         // Outgoing Transaction
         Route::get('/transaksi-keluar', 'App\Http\Controllers\Report\ReportController@outgoing_transaction_report')->name('outgoing-transaction');
-        Route::get('/print-transaksi-keluar/{fromDate}/{toDate}', 'App\Http\Controllers\Report\ReportController@pdf_outgoing_transaction_report')->name('incoming-transaction-pdf');
+        Route::get('/print-transaksi-keluar/{fromDate}/{toDate}', 'App\Http\Controllers\Report\ReportController@pdf_outgoing_transaction_report')->name('outgoing-transaction-pdf');
     });
 });

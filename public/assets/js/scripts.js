@@ -94,3 +94,5 @@ $(".delete-data-cart").click(function (e) {
         },
     });
 });
+
+$(".date-input").flatpickr();
