@@ -18,7 +18,7 @@ class IncomingTransactionController extends Controller
 {
     public function index()
     {
-        $transactions = Transaction::where('type', 1)->get();
+        $transactions = Transaction::with('payment')->where('type', 1)->get();
 
         return view('pages.transaction.incoming_transaction.transaction.incoming_transaction', compact('transactions'));
     }
@@ -202,6 +202,20 @@ class IncomingTransactionController extends Controller
             $payment->save();
 
             return redirect()->route('incoming-transaction.index');
+        }
+    }
+
+    public function destroy($id)
+    {
+        try {
+            $id = Crypt::decrypt($id);
+
+            $ingredient = Transaction::findOrFail($id);
+            $ingredient->delete();
+
+            return redirect()->route('incoming-transaction.index')->with('success', 'Berhasil Menghapus Data !!');
+        } catch (\Throwable $th) {
+            return redirect()->route('incoming-transaction.index')->with('error', 'Gagal Menghapus Data !!');
         }
     }
 

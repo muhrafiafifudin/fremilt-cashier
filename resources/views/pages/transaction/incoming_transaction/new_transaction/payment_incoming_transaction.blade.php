@@ -57,19 +57,19 @@
                                 <!--begin::Input group-->
                                 <div class="row g-12 mb-5">
                                     <!--begin::Col-->
-                                    <div class="col-md-4 fv-row">
+                                    <div class="col-md-6 fv-row">
                                         <input type="text" class="form-control form-control-solid text-center" value="{{ $transaction->name }}" disabled/>
                                     </div>
                                     <!--begin::Col-->
                                     <!--begin::Col-->
-                                    <div class="col-md-4 fv-row">
+                                    {{-- <div class="col-md-4 fv-row">
                                         <select class="form-select form-select-solid text-center" data-hide-search="true" disabled >
                                             <option>{{ $transaction->payment_type == 1 ? 'Tunai' : 'Debit' }}</option>
                                         </select>
-                                    </div>
+                                    </div> --}}
                                     <!--begin::Col-->
                                     <!--begin::Col-->
-                                    <div class="col-md-4 fv-row">
+                                    <div class="col-md-6 fv-row">
                                         <input type="text" class="form-control form-control-solid text-center" value="{{ \Carbon\Carbon::now()->locale('id')->isoFormat('dddd, D MMMM YYYY') }}" disabled/>
                                     </div>
                                     <!--begin::Col-->

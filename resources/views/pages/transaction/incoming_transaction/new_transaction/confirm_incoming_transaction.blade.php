@@ -54,21 +54,24 @@
                                     <!--begin::Input group-->
                                     <div class="row g-12 mb-5">
                                         <!--begin::Col-->
-                                        <div class="col-md-4 fv-row">
+                                        <div class="col-md-6 fv-row">
                                             <input type="text" class="form-control form-control-solid text-center" name="name" placeholder="Masukkan Nama Pembeli" />
                                         </div>
                                         <!--begin::Col-->
                                         <!--begin::Col-->
-                                        <div class="col-md-4 fv-row">
+                                        {{-- <div class="col-md-4 fv-row">
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilh Metode Pembayaran" name="payment_type" required >
                                                 <option value="">Pilih Metode Pembayaran</option>
                                                 <option value="1">Tunai</option>
                                                 <option value="2">Debit</option>
                                             </select>
-                                        </div>
+                                        </div> --}}
                                         <!--begin::Col-->
+
+                                        <input type="hidden" name="payment_type" value="1">
+
                                         <!--begin::Col-->
-                                        <div class="col-md-4 fv-row">
+                                        <div class="col-md-6 fv-row">
                                             <input type="text" class="form-control form-control-solid text-center" value="{{ \Carbon\Carbon::now()->locale('id')->isoFormat('dddd, D MMMM YYYY') }}" disabled/>
                                         </div>
                                         <!--begin::Col-->
