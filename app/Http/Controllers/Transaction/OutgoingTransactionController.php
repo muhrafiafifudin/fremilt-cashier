@@ -265,4 +265,18 @@ class OutgoingTransactionController extends Controller
             return response()->json(['status' => 'Warning !!']);
         }
     }
+
+    public function destroy($id)
+    {
+        try {
+            $id = Crypt::decrypt($id);
+
+            $ingredient = Transaction::findOrFail($id);
+            $ingredient->delete();
+
+            return redirect()->route('outrsorching-transaction.index')->with('success', 'Berhasil Menghapus Data !!');
+        } catch (\Throwable $th) {
+            return redirect()->route('outrsorching-transaction.index')->with('error', 'Gagal Menghapus Data !!');
+        }
+    }
 }

@@ -103,6 +103,8 @@ Route::group(['middleware' => 'auth'], function () {
         // Add & Update Transaction Data
         Route::post('/', 'App\Http\Controllers\Transaction\OutgoingTransactionController@store')->name('store');
         Route::match(['put', 'patch'], '/{outgoingTransaction}', 'App\Http\Controllers\Transaction\OutgoingTransactionController@update')->name('update');
+        // Delete Transaction
+        Route::delete('/{incomingTransaction}', 'App\Http\Controllers\Transaction\IncomingTransactionController@destroy')->name('destroy');
         // Cart
         Route::post('/add-product', 'App\Http\Controllers\Transaction\OutgoingTransactionController@addProduct')->name('add-product');
         Route::post('/update-product', 'App\Http\Controllers\Transaction\OutgoingTransactionController@updateProduct')->name('update-product');
