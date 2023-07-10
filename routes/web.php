@@ -89,8 +89,19 @@ Route::group(['middleware' => 'auth'], function () {
     });
     // Outgoing Transaction
     Route::group(['prefix' => 'transaksi-keluar', 'as' => 'outgoing-transaction.'], function () {
+        // All Transaction Page
         Route::get('/', 'App\Http\Controllers\Transaction\OutgoingTransactionController@index')->name('index');
+        // New Transaction Page
         Route::get('/transaksi-baru', 'App\Http\Controllers\Transaction\OutgoingTransactionController@create')->name('create');
+        Route::get('/transaksi-baru/{outgoingTransaction}', 'App\Http\Controllers\Transaction\OutgoingTransactionController@confirmTransaction')->name('confirm');
+        Route::get('/pembayaran/{outgoingTransaction}/{paymentType}', 'App\Http\Controllers\Transaction\OutgoingTransactionController@payment')->name('payment');
+        Route::post('/pembayaran', 'App\Http\Controllers\Transaction\OutgoingTransactionController@paymentPost')->name('add-payment');
+        // Detail Transaction
+        Route::get('/{incomingTransaction}', 'App\Http\Controllers\Transaction\OutgoingTransactionController@show')->name('show');
+        // Add & Update Transaction Data
+        Route::post('/', 'App\Http\Controllers\Transaction\OutgoingTransactionController@store')->name('store');
+        Route::match(['put', 'patch'], '/{outgoingTransaction}', 'App\Http\Controllers\Transaction\OutgoingTransactionController@update')->name('update');
+        // Cart
         Route::post('/add-product', 'App\Http\Controllers\Transaction\OutgoingTransactionController@addProduct')->name('add-product');
         Route::post('/update-product', 'App\Http\Controllers\Transaction\OutgoingTransactionController@updateProduct')->name('update-product');
         Route::post('/delete-product', 'App\Http\Controllers\Transaction\OutgoingTransactionController@deleteProduct')->name('delete-product');
