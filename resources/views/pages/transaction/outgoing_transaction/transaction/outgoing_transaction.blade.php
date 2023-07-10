@@ -90,10 +90,9 @@
                                                         @endif
                                                     </td>
                                                     <td class="text-center">
-                                                        <form action="{{ route('outgoing-transaction.destroy') }}" method="POST">
+                                                        <form action="{{ route('outgoing-transaction.destroy', \Crypt::encrypt($transaction->id)) }}" method="POST">
                                                             @csrf
                                                             @method('DELETE')
-
 
                                                             <button type="button" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm delete-data" title="Hapus">
                                                                 <!--begin::Svg Icon | path: icons/stockholm/General/Trash.svg-->
@@ -106,6 +105,9 @@
                                                                         </g>
                                                                     </svg>
                                                                 </span>
+                                                                <!--end::Svg Icon-->
+                                                            </button>
+                                                        </form>
                                                                 <!--end::Svg Icon-->
                                                             </button>
                                                         </form>
