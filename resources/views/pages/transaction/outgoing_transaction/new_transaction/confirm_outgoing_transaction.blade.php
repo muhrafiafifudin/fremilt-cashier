@@ -59,13 +59,14 @@
                                         </div>
                                         <!--begin::Col-->
                                         <!--begin::Col-->
-                                        <div class="col-md-4 fv-row">
+                                        {{-- <div class="col-md-4 fv-row">
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilh Metode Pembayaran" name="payment_type" required >
                                                 <option value="">Pilih Metode Pembayaran</option>
                                                 <option value="1">Tunai</option>
                                                 <option value="2">Debit</option>
                                             </select>
-                                        </div>
+                                        </div> --}}
+
                                         <!--begin::Col-->
                                         <!--begin::Col-->
                                         <div class="col-md-4 fv-row">
@@ -90,7 +91,7 @@
                                             </thead>
                                             <tbody>
                                                 @php $no = 1; $subTotal = 0; @endphp
-                                                @foreach ($transaction_details as $transaction_detail)
+                                                @foreach ($transaction_details->payment as $transaction_detail)
                                                     <tr class="product-data">
                                                         <td>{{ $no++ }}</td>
                                                         <td>{{ $transaction_detail->product->product }}</td>
