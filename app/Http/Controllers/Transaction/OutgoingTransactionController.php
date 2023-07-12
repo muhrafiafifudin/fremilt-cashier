@@ -205,6 +205,20 @@ class OutgoingTransactionController extends Controller
         }
     }
 
+    public function destroy($id)
+    {
+        try {
+            $id = Crypt::decrypt($id);
+
+            $ingredient = Transaction::findOrFail($id);
+            $ingredient->delete();
+
+            return redirect()->route('outgoing-transaction.index')->with('success', 'Berhasil Menghapus Data !!');
+        } catch (\Throwable $th) {
+            return redirect()->route('outgoing-transaction.index')->with('error', 'Gagal Menghapus Data !!');
+        }
+    }
+
     public function addProduct(Request $request)
     {
         try {
@@ -263,20 +277,6 @@ class OutgoingTransactionController extends Controller
             }
         } else {
             return response()->json(['status' => 'Warning !!']);
-        }
-    }
-
-    public function destroy($id)
-    {
-        try {
-            $id = Crypt::decrypt($id);
-
-            $ingredient = Transaction::findOrFail($id);
-            $ingredient->delete();
-
-            return redirect()->route('outrsorching-transaction.index')->with('success', 'Berhasil Menghapus Data !!');
-        } catch (\Throwable $th) {
-            return redirect()->route('outrsorching-transaction.index')->with('error', 'Gagal Menghapus Data !!');
         }
     }
 }

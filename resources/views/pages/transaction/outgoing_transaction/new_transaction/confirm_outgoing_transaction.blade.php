@@ -54,7 +54,7 @@
                                     <!--begin::Input group-->
                                     <div class="row g-12 mb-5">
                                         <!--begin::Col-->
-                                        <div class="col-md-4 fv-row">
+                                        <div class="col-md-6 fv-row">
                                             <input type="text" class="form-control form-control-solid text-center" name="name" placeholder="Masukkan Nama Pembeli" />
                                         </div>
                                         <!--begin::Col-->
@@ -68,8 +68,11 @@
                                         </div> --}}
 
                                         <!--begin::Col-->
+
+                                        <input type="hidden" name="payment_type" value="1">
+
                                         <!--begin::Col-->
-                                        <div class="col-md-4 fv-row">
+                                        <div class="col-md-6 fv-row">
                                             <input type="text" class="form-control form-control-solid text-center" value="{{ \Carbon\Carbon::now()->locale('id')->isoFormat('dddd, D MMMM YYYY') }}" disabled/>
                                         </div>
                                         <!--begin::Col-->
@@ -91,7 +94,7 @@
                                             </thead>
                                             <tbody>
                                                 @php $no = 1; $subTotal = 0; @endphp
-                                                @foreach ($transaction_details->payment as $transaction_detail)
+                                                @foreach ($transaction_details as $transaction_detail)
                                                     <tr class="product-data">
                                                         <td>{{ $no++ }}</td>
                                                         <td>{{ $transaction_detail->product->product }}</td>

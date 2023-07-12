@@ -108,9 +108,6 @@
                                                                 <!--end::Svg Icon-->
                                                             </button>
                                                         </form>
-                                                                <!--end::Svg Icon-->
-                                                            </button>
-                                                        </form>
                                                     </td>
                                                 </tr>
                                             @endforeach
