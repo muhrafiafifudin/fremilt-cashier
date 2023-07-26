@@ -55,7 +55,7 @@
                                     <div class="row g-12 mb-5">
                                         <!--begin::Col-->
                                         <div class="col-md-6 fv-row">
-                                            <input type="text" class="form-control form-control-solid text-center" name="name" placeholder="Masukkan Nama Pembeli" />
+                                            <input type="text" class="form-control form-control-solid text-center" name="name" placeholder="Masukkan Nama Pembeli" required/>
                                         </div>
                                         <!--begin::Col-->
                                         <!--begin::Col-->

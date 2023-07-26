@@ -93,7 +93,7 @@
                             <span class="menu-title">Kategori</span>
                         </a>
                     </div>
-                    {{-- <div class="menu-item">
+                    <div class="menu-item">
                         <a class="menu-link {{ request()->is('bahan') ? 'active' : '' }}" href="{{ route('ingredient.index') }}">
                             <span class="menu-icon">
                                 <!--begin::Svg Icon | path: icons/stockholm/Layout/Layout-arrange.svg-->
@@ -111,7 +111,7 @@
                             <span class="menu-title">Bahan</span>
                         </a>
                     </div>
-                    <div class="menu-item">
+                    {{-- <div class="menu-item">
                         <a class="menu-link {{ request()->is('toping') ? 'active' : '' }}" href="{{ route('topping.index') }}">
                             <span class="menu-icon">
                                 <!--begin::Svg Icon | path: icons/stockholm/Layout/Layout-arrange.svg-->
