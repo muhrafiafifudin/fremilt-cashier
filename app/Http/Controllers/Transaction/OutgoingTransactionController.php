@@ -33,9 +33,12 @@ class OutgoingTransactionController extends Controller
 
     public function show($id)
     {
-        $transaction = Transaction::findOrFail($id);
+        $id = Crypt::decrypt($id);
 
-        return view('pages.transaction.outgoing_transaction.new_transaction.detail_outgoing_transaction', compact('transaction'));
+        $transaction = Transaction::findOrFail($id);
+        $transaction_details = TransactionDetail::where('transaction_id', $id)->get();
+
+        return view('pages.transaction.outgoing_transaction.new_transaction.detail_outgoing_transaction', compact('transaction', 'transaction_details'));
     }
 
     public function store(Request $request)
@@ -141,6 +144,8 @@ class OutgoingTransactionController extends Controller
 
         $transaction = Transaction::where('order_number', $order_number)->first();
 
+        $transaction_id = Crypt::encrypt($transaction->id);
+
         if ($transaction->payment_type == 1) {
             $payment = new Payment();
             $payment->order_number = $order_number;
@@ -153,7 +158,7 @@ class OutgoingTransactionController extends Controller
             $payment->money_change = $request->money_change;
             $payment->save();
 
-            return redirect()->route('outgoing-transaction.index');
+            return redirect()->route('outgoing-transaction.show', $transaction_id);
         } else {
             $json = json_decode($request->get('json'));
 
