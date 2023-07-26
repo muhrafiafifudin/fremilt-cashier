@@ -38,7 +38,9 @@ class OutgoingTransactionController extends Controller
         $transaction = Transaction::findOrFail($id);
         $transaction_details = TransactionDetail::where('transaction_id', $id)->get();
 
-        return view('pages.transaction.outgoing_transaction.new_transaction.detail_outgoing_transaction', compact('transaction', 'transaction_details'));
+        $payment = Payment::where('order_number', $transaction->order_number)->first();
+
+        return view('pages.transaction.outgoing_transaction.new_transaction.detail_outgoing_transaction', compact('transaction', 'transaction_details', 'payment'));
     }
 
     public function store(Request $request)
@@ -146,6 +148,12 @@ class OutgoingTransactionController extends Controller
 
         $transaction_id = Crypt::encrypt($transaction->id);
 
+        if ($request->money_change == 0) {
+            $pay = 0;
+        } else {
+            $pay = $transaction->total + $request->money_change;
+        }
+
         if ($transaction->payment_type == 1) {
             $payment = new Payment();
             $payment->order_number = $order_number;
@@ -154,7 +162,7 @@ class OutgoingTransactionController extends Controller
             $payment->status_code = '200';
             $payment->transaction_status = 'paid';
             $payment->transaction_time = Carbon::now();
-            $payment->payment = $request->payment;
+            $payment->payment = $pay;
             $payment->money_change = $request->money_change;
             $payment->save();
 
