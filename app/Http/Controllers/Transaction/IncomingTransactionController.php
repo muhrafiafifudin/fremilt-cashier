@@ -33,9 +33,14 @@ class IncomingTransactionController extends Controller
 
     public function show($id)
     {
-        $transaction = Transaction::findOrFail($id);
+        $id = Crypt::decrypt($id);
 
-        return view('pages.transaction.incoming_transaction.new_transaction.detail_incoming_transaction', compact('transaction'));
+        $transaction = Transaction::findOrFail($id);
+        $transaction_details = TransactionDetail::where('transaction_id', $id)->get();
+
+        $payment = Payment::where('order_number', $transaction->order_number)->first();
+
+        return view('pages.transaction.incoming_transaction.transaction.detail_incoming_transaction', compact('transaction', 'transaction_details', 'payment'));
     }
 
     public function store(Request $request)
@@ -141,6 +146,14 @@ class IncomingTransactionController extends Controller
 
         $transaction = Transaction::where('order_number', $order_number)->first();
 
+        $transaction_id = Crypt::encrypt($transaction->id);
+
+        if ($request->money_change == 0) {
+            $pay = 0;
+        } else {
+            $pay = $transaction->total + $request->money_change;
+        }
+
         if ($transaction->payment_type == 1) {
             $payment = new Payment();
             $payment->order_number = $order_number;
@@ -149,11 +162,11 @@ class IncomingTransactionController extends Controller
             $payment->status_code = '200';
             $payment->transaction_status = 'paid';
             $payment->transaction_time = Carbon::now();
-            $payment->payment = $request->payment;
+            $payment->payment = $pay;
             $payment->money_change = $request->money_change;
             $payment->save();
 
-            return redirect()->route('incoming-transaction.index');
+            return redirect()->route('incoming-transaction.show', $transaction_id);
         } else {
             $json = json_decode($request->get('json'));
 

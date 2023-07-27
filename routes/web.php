@@ -78,7 +78,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/pembayaran/{incomingTransaction}/{paymentType}', 'App\Http\Controllers\Transaction\IncomingTransactionController@payment')->name('payment');
         Route::post('/pembayaran', 'App\Http\Controllers\Transaction\IncomingTransactionController@paymentPost')->name('add-payment');
         // Detail Transaction
-        Route::get('/{incomingTransaction}', 'App\Http\Controllers\Transaction\IncomingTransactionController@show')->name('show');
+        Route::get('/{outgoingTransaction}', 'App\Http\Controllers\Transaction\IncomingTransactionController@show')->name('show');
         // Add & Update Transaction Data
         Route::post('/', 'App\Http\Controllers\Transaction\IncomingTransactionController@store')->name('store');
         Route::match(['put', 'patch'], '/{incomingTransaction}', 'App\Http\Controllers\Transaction\IncomingTransactionController@update')->name('update');
