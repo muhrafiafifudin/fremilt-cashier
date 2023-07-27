@@ -99,7 +99,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/pembayaran/{outgoingTransaction}/{paymentType}', 'App\Http\Controllers\Transaction\OutgoingTransactionController@payment')->name('payment');
         Route::post('/pembayaran', 'App\Http\Controllers\Transaction\OutgoingTransactionController@paymentPost')->name('add-payment');
         // Detail Transaction
-        Route::get('/{incomingTransaction}', 'App\Http\Controllers\Transaction\OutgoingTransactionController@show')->name('show');
+        Route::get('/{outgoingTransaction}', 'App\Http\Controllers\Transaction\OutgoingTransactionController@show')->name('show');
         // Add & Update Transaction Data
         Route::post('/', 'App\Http\Controllers\Transaction\OutgoingTransactionController@store')->name('store');
         Route::match(['put', 'patch'], '/{outgoingTransaction}', 'App\Http\Controllers\Transaction\OutgoingTransactionController@update')->name('update');
@@ -109,6 +109,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/add-product', 'App\Http\Controllers\Transaction\OutgoingTransactionController@addProduct')->name('add-product');
         Route::post('/update-product', 'App\Http\Controllers\Transaction\OutgoingTransactionController@updateProduct')->name('update-product');
         Route::post('/delete-product', 'App\Http\Controllers\Transaction\OutgoingTransactionController@deleteProduct')->name('delete-product');
+        // Print Ourgoing Transaction
+        Route::get('/print-outgoing-transaction/{outgoingTransaction}', 'App\Http\Controllers\Transaction\OutgoingTransactionController@pdf_print')->name('pdf-print');
     });
     // Report
     Route::group(['prefix' => 'laporan', 'as' => 'report.'], function () {

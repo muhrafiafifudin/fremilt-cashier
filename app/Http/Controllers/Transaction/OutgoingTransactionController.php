@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Transaction;
 
+use PDF;
 use Midtrans;
 use Carbon\Carbon;
 use App\Models\Cart;
@@ -40,7 +41,7 @@ class OutgoingTransactionController extends Controller
 
         $payment = Payment::where('order_number', $transaction->order_number)->first();
 
-        return view('pages.transaction.outgoing_transaction.new_transaction.detail_outgoing_transaction', compact('transaction', 'transaction_details', 'payment'));
+        return view('pages.transaction.outgoing_transaction.transaction.detail_outgoing_transaction', compact('transaction', 'transaction_details', 'payment'));
     }
 
     public function store(Request $request)
@@ -291,5 +292,19 @@ class OutgoingTransactionController extends Controller
         } else {
             return response()->json(['status' => 'Warning !!']);
         }
+    }
+
+    public function pdf_print($id)
+    {
+        $id = Crypt::decrypt($id);
+
+        $transaction = Transaction::findOrFail($id);
+        $transaction_details = TransactionDetail::where('transaction_id', $id)->get();
+
+        $payment = Payment::where('order_number', $transaction->order_number)->first();
+
+        $pdf = PDF::loadView('pages.transaction.outgoing_transaction.pdf.outgoing_report', compact('transaction', 'transaction_details', 'payment'))->setPaper([0, 0, 197, 394], 'portrait');
+
+        return $pdf->download('Nota Transaksi.pdf');
     }
 }
