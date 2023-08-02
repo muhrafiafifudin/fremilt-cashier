@@ -118,7 +118,7 @@
                                 <!--end::Table container-->
 
                                 <div class="text-center">
-                                    <a href="{{ route('outgoing-transaction.pdf-print', \Crypt::encrypt($transaction->id)) }}" class="btn btn-sm btn-light-primary mt-10 mb-10 me-5">
+                                    <a href="{{ route('outgoing-transaction.pdf-print', \Crypt::encrypt($transaction->id)) }}" class="btn btn-sm btn-light-primary mt-10 mb-10 me-5" target="_blank">
                                         <!--begin::Svg Icon | path: icons/stockholm/Communication/Add-user.svg-->
                                         <span class="svg-icon svg-icon-3">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">

@@ -298,12 +298,27 @@ class OutgoingTransactionController extends Controller
     {
         $id = Crypt::decrypt($id);
 
+        $paperSize = '5mmx7mm';
+        $paperOrientation = 'portrait';
+
+        $marginTop = 0;
+        $marginRight = 0;
+        $marginBottom = 0;
+        $marginLeft = 0;
+
         $transaction = Transaction::findOrFail($id);
         $transaction_details = TransactionDetail::where('transaction_id', $id)->get();
 
         $payment = Payment::where('order_number', $transaction->order_number)->first();
 
-        $pdf = PDF::loadView('pages.transaction.outgoing_transaction.pdf.outgoing_report', compact('transaction', 'transaction_details', 'payment'))->setPaper([0, 0, 197, 394], 'portrait');
+        $pdf = PDF::loadView('pages.transaction.outgoing_transaction.pdf.outgoing_report', compact('transaction', 'transaction_details', 'payment'))
+                    ->setPaper($paperSize, $paperOrientation)
+                    ->setOptions([
+                        'margin-top' => $marginTop,
+                        'margin-right' => $marginRight,
+                        'margin-bottom' => $marginBottom,
+                        'margin-left' => $marginLeft,
+                    ]);
 
         return $pdf->download('Nota Transaksi.pdf');
     }
