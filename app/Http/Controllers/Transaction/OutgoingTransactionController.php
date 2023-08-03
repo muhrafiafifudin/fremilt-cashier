@@ -298,7 +298,17 @@ class OutgoingTransactionController extends Controller
     {
         $id = Crypt::decrypt($id);
 
-        $paperSize = '5mmx7mm';
+        $transaction = Transaction::findOrFail($id);
+        $transaction_details = TransactionDetail::where('transaction_id', $id)->get();
+
+        $payment = Payment::where('order_number', $transaction->order_number)->first();
+
+        $dummyPdf  = PDF::loadView('pages.transaction.outgoing_transaction.pdf.outgoing_report', compact('transaction', 'transaction_details', 'payment'));
+        $dummyPdf ->render();
+
+        $contentHeight = $dummyPdf ->getDomPDF()->getCanvas()->get_height();
+
+        $paperSize = [0, 0, 208, $contentHeight];
         $paperOrientation = 'portrait';
 
         $marginTop = 0;
@@ -306,20 +316,44 @@ class OutgoingTransactionController extends Controller
         $marginBottom = 0;
         $marginLeft = 0;
 
-        $transaction = Transaction::findOrFail($id);
-        $transaction_details = TransactionDetail::where('transaction_id', $id)->get();
-
-        $payment = Payment::where('order_number', $transaction->order_number)->first();
-
         $pdf = PDF::loadView('pages.transaction.outgoing_transaction.pdf.outgoing_report', compact('transaction', 'transaction_details', 'payment'))
-                    ->setPaper($paperSize, $paperOrientation)
-                    ->setOptions([
-                        'margin-top' => $marginTop,
-                        'margin-right' => $marginRight,
-                        'margin-bottom' => $marginBottom,
-                        'margin-left' => $marginLeft,
-                    ]);
+            ->setPaper($paperSize, $paperOrientation)
+            ->setOptions([
+                'margin-top' => $marginTop,
+                'margin-right' => $marginRight,
+                'margin-bottom' => $marginBottom,
+                'margin-left' => $marginLeft,
+            ]);
 
         return $pdf->download('Nota Transaksi.pdf');
     }
+
+    // public function pdf_print($id)
+    // {
+    //     $id = Crypt::decrypt($id);
+
+    //     $paperSize = [0, 0, 208, 500];
+    //     $paperOrientation = 'portrait';
+
+    //     $marginTop = 0;
+    //     $marginRight = 0;
+    //     $marginBottom = 0;
+    //     $marginLeft = 0;
+
+    //     $transaction = Transaction::findOrFail($id);
+    //     $transaction_details = TransactionDetail::where('transaction_id', $id)->get();
+
+    //     $payment = Payment::where('order_number', $transaction->order_number)->first();
+
+    //     $pdf = PDF::loadView('pages.transaction.outgoing_transaction.pdf.outgoing_report', compact('transaction', 'transaction_details', 'payment'))
+    //                 ->setPaper($paperSize, $paperOrientation)
+    //                 ->setOptions([
+    //                     'margin-top' => $marginTop,
+    //                     'margin-right' => $marginRight,
+    //                     'margin-bottom' => $marginBottom,
+    //                     'margin-left' => $marginLeft,
+    //                 ]);
+
+    //     return $pdf->download('Nota Transaksi.pdf');
+    // }
 }
