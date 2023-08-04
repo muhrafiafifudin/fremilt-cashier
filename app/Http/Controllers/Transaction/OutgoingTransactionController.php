@@ -146,8 +146,16 @@ class OutgoingTransactionController extends Controller
         $order_number = $request->order_number;
 
         $transaction = Transaction::where('order_number', $order_number)->first();
+        $transaction_details = TransactionDetail::where('transaction_id', $transaction->id)->get();
+
+        foreach ($transaction_details as $transaction_detail) {
+            $product = Product::where('id', $transaction_detail->product_id)->first();
+            $product->stock -= $transaction_detail->product_qty;
+            $product->update();
+        }
 
         $transaction_id = Crypt::encrypt($transaction->id);
+
 
         if ($request->money_change == 0) {
             $pay = 0;
