@@ -8,14 +8,14 @@
     .text-end {
         text-align: right;
     }
+    .f-12 {
+        font-size: 12px
+    }
 </style>
 
-<table width="100%">
+<table width="100%" class="f-12">
     <tr>
-        <td colspan="2" class="text-center">Fremilt</td>
-    </tr>
-    <tr>
-        <td colspan="2" class="text-center">Solo Baru</td>
+        <td colspan="2" class="text-center"><strong>Fremilt Solo Baru</strong></td>
     </tr>
     <tr>
         <td colspan="2" class="text-center">Jalan Kenangan No. 12</td>
@@ -38,15 +38,15 @@
     <br>
 
     <tr>
-        <td>**TOTAL</td>
+        <td>**Total</td>
         <td class="text-end">{{ $payment->gross_amount }}</td>
     </tr>
     <tr>
-        <td>BAYAR</td>
+        <td>Bayar</td>
         <td class="text-end">{{ $payment->payment }}</td>
     </tr>
     <tr>
-        <td>KEMBALI</td>
+        <td>Kembali</td>
         <td class="text-end">{{ $payment->money_change }}</td>
     </tr>
 
@@ -54,9 +54,9 @@
     <br>
 
     <tr>
-        <td colspan="2" class="text-center">TERIMA KASIH</td>
+        <td colspan="2" class="text-center"><strong>Terima Kasih</strong></td>
     </tr>
     <tr>
-        <td colspan="2" class="text-center">ATAS KUNJUNGAN ANDA</td>
+        <td colspan="2" class="text-center">Silahkan berkunjung kembali</td>
     </tr>
 </table>

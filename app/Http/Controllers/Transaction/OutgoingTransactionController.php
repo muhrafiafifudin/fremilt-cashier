@@ -312,26 +312,17 @@ class OutgoingTransactionController extends Controller
         $payment = Payment::where('order_number', $transaction->order_number)->first();
 
         $dummyPdf  = PDF::loadView('pages.transaction.outgoing_transaction.pdf.outgoing_report', compact('transaction', 'transaction_details', 'payment'));
-        $dummyPdf ->render();
+        $dummyPdf->render();
 
-        $contentHeight = $dummyPdf ->getDomPDF()->getCanvas()->get_height();
+        $contentHeight = $dummyPdf->getDomPDF()->getCanvas()->get_height();
 
-        $paperSize = [0, 0, 208, $contentHeight];
+        dd($contentHeight);
+
+        $paperSize = [0, 0, 207, $contentHeight];
         $paperOrientation = 'portrait';
 
-        $marginTop = 0;
-        $marginRight = 0;
-        $marginBottom = 0;
-        $marginLeft = 0;
-
         $pdf = PDF::loadView('pages.transaction.outgoing_transaction.pdf.outgoing_report', compact('transaction', 'transaction_details', 'payment'))
-            ->setPaper($paperSize, $paperOrientation)
-            ->setOptions([
-                'margin-top' => $marginTop,
-                'margin-right' => $marginRight,
-                'margin-bottom' => $marginBottom,
-                'margin-left' => $marginLeft,
-            ]);
+            ->setPaper($paperSize, $paperOrientation);
 
         return $pdf->download('Nota Transaksi.pdf');
     }
