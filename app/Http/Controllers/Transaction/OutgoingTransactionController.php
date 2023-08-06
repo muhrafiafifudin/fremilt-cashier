@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\View;
 use Mike42\Escpos\CapabilityProfile;
 use Illuminate\Support\Facades\Crypt;
 use Mike42\Escpos\PrintConnectors\FilePrintConnector;
+use Mike42\Escpos\PrintConnectors\NetworkPrintConnector;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 
 class OutgoingTransactionController extends Controller
@@ -307,52 +308,53 @@ class OutgoingTransactionController extends Controller
         }
     }
 
-    // public function pdf_print($id)
-    // {
-    //     $id = Crypt::decrypt($id);
-
-    //     try {
-    //         $connector = new WindowsPrintConnector("POS-58"); // Ganti dengan nama printer yang sebenarnya
-    //         $printer = new Printer($connector);
-
-    //         $printer->text("Hello, Printer!");
-    //         $printer->cut();
-
-    //         $printer->close();
-
-    //         return "Print successful!";
-    //     } catch (\Exception $e) {
-    //         return "Printing failed: " . $e->getMessage();
-    //     }
-
-    // }
-
     public function pdf_print($id)
     {
         $id = Crypt::decrypt($id);
 
-        $paperSize = [0, 0, 208, 794];
-        $paperOrientation = 'portrait';
-
-        $marginTop = 0;
-        $marginRight = 0;
-        $marginBottom = 0;
-        $marginLeft = 0;
-
-        $transaction = Transaction::findOrFail($id);
+        $transaction = Transaction::where('id', $id)->first();
         $transaction_details = TransactionDetail::where('transaction_id', $id)->get();
 
         $payment = Payment::where('order_number', $transaction->order_number)->first();
 
-        $pdf = PDF::loadView('pages.transaction.outgoing_transaction.pdf.outgoing_report', compact('transaction', 'transaction_details', 'payment'))
-                    ->setPaper($paperSize, $paperOrientation)
-                    ->setOptions([
-                        'margin-top' => $marginTop,
-                        'margin-right' => $marginRight,
-                        'margin-bottom' => $marginBottom,
-                        'margin-left' => $marginLeft,
-                    ]);
+        try {
+            $connector = new WindowsPrintConnector("POS-58");
 
-        return $pdf->download('Nota Transaksi.pdf');
+            $printer = new Printer($connector);
+            $printer->initialize();
+
+            $printer->setJustification(Printer::JUSTIFY_CENTER);
+            $printer->text("Fremilt Solo Baru\n");
+            $printer->text("Jalan Kenangan No. 12\n");
+            $printer->setJustification(Printer::JUSTIFY_LEFT);
+            $printer->feed();
+            $printer->text("===============================\n");
+            $printer->text("No. Nota    : ");
+            $printer->text($transaction->order_number . "\n");
+            $printer->text("Kasir       : ");
+            $printer->text($transaction->user->name . "\n");
+            $printer->text("-------------------------------\n");
+
+            foreach ($transaction_details as $transaction_detail) {
+                $printer->text(str_pad($transaction_detail->product_qty . ' x ' . $transaction_detail->product->product, 20, " ", STR_PAD_RIGHT) . str_pad(number_format($transaction_detail->product_qty * $transaction_detail->product->price, 0), 10, " ", STR_PAD_LEFT) . "\n");
+            }
+
+            $printer->text("-------------------------------\n");
+            $printer->text(str_pad("Total Tagihan", 20, " ", STR_PAD_RIGHT) . str_pad(number_format($payment->gross_amount, 0), 10, " ", STR_PAD_LEFT) . "\n");
+            $printer->text("-------------------------------\n");
+            $printer->text(str_pad("Total Bayar", 20, " ", STR_PAD_RIGHT) . str_pad(number_format($payment->payment, 0), 10, " ", STR_PAD_LEFT) . "\n");
+            $printer->text(str_pad("Kembalian", 20, " ", STR_PAD_RIGHT) . str_pad(number_format($payment->money_change, 0), 10, " ", STR_PAD_LEFT) . "\n");
+            $printer->text("===============================\n");
+            $printer->feed();
+            $printer->setJustification(Printer::JUSTIFY_CENTER);
+            $printer->text("Terima Kasih\n");
+            $printer->text("Silahkan Berkunjung Kembali\n");
+            $printer->cut();
+            $printer->close();
+
+            return view('pages.transaction.outgoing_transaction.transaction.detail_outgoing_transaction', compact('transaction', 'transaction_details', 'payment'))->with('success', 'Berhasil Mencetak Data !!');
+        } catch (\Exception $e) {
+            return view('pages.transaction.outgoing_transaction.transaction.detail_outgoing_transaction', compact('transaction', 'transaction_details', 'payment'))->with('error', 'Gagal Mencetak Data !!');
+        }
     }
 }
