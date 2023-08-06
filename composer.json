@@ -12,6 +12,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "midtrans/midtrans-php": "^2.5",
+        "mike42/escpos-php": "*",
         "spatie/laravel-permission": "^5.10"
     },
     "require-dev": {

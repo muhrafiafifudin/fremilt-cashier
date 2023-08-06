@@ -9,7 +9,7 @@
         text-align: right;
     }
     .f-12 {
-        font-size: 12px
+        font-size: 16px
     }
 </style>
 

@@ -8,12 +8,17 @@ use Carbon\Carbon;
 use App\Models\Cart;
 use App\Models\Payment;
 use App\Models\Product;
+use Mike42\Escpos\Printer;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Models\TransactionDetail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
+use Mike42\Escpos\CapabilityProfile;
 use Illuminate\Support\Facades\Crypt;
+use Mike42\Escpos\PrintConnectors\FilePrintConnector;
+use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 
 class OutgoingTransactionController extends Controller
 {
@@ -302,57 +307,52 @@ class OutgoingTransactionController extends Controller
         }
     }
 
+    // public function pdf_print($id)
+    // {
+    //     $id = Crypt::decrypt($id);
+
+    //     try {
+    //         $connector = new WindowsPrintConnector("POS-58"); // Ganti dengan nama printer yang sebenarnya
+    //         $printer = new Printer($connector);
+
+    //         $printer->text("Hello, Printer!");
+    //         $printer->cut();
+
+    //         $printer->close();
+
+    //         return "Print successful!";
+    //     } catch (\Exception $e) {
+    //         return "Printing failed: " . $e->getMessage();
+    //     }
+
+    // }
+
     public function pdf_print($id)
     {
         $id = Crypt::decrypt($id);
+
+        $paperSize = [0, 0, 208, 794];
+        $paperOrientation = 'portrait';
+
+        $marginTop = 0;
+        $marginRight = 0;
+        $marginBottom = 0;
+        $marginLeft = 0;
 
         $transaction = Transaction::findOrFail($id);
         $transaction_details = TransactionDetail::where('transaction_id', $id)->get();
 
         $payment = Payment::where('order_number', $transaction->order_number)->first();
 
-        $dummyPdf  = PDF::loadView('pages.transaction.outgoing_transaction.pdf.outgoing_report', compact('transaction', 'transaction_details', 'payment'));
-        $dummyPdf->render();
-
-        $contentHeight = $dummyPdf->getDomPDF()->getCanvas()->get_height();
-
-        dd($contentHeight);
-
-        $paperSize = [0, 0, 207, $contentHeight];
-        $paperOrientation = 'portrait';
-
         $pdf = PDF::loadView('pages.transaction.outgoing_transaction.pdf.outgoing_report', compact('transaction', 'transaction_details', 'payment'))
-            ->setPaper($paperSize, $paperOrientation);
+                    ->setPaper($paperSize, $paperOrientation)
+                    ->setOptions([
+                        'margin-top' => $marginTop,
+                        'margin-right' => $marginRight,
+                        'margin-bottom' => $marginBottom,
+                        'margin-left' => $marginLeft,
+                    ]);
 
         return $pdf->download('Nota Transaksi.pdf');
     }
-
-    // public function pdf_print($id)
-    // {
-    //     $id = Crypt::decrypt($id);
-
-    //     $paperSize = [0, 0, 208, 500];
-    //     $paperOrientation = 'portrait';
-
-    //     $marginTop = 0;
-    //     $marginRight = 0;
-    //     $marginBottom = 0;
-    //     $marginLeft = 0;
-
-    //     $transaction = Transaction::findOrFail($id);
-    //     $transaction_details = TransactionDetail::where('transaction_id', $id)->get();
-
-    //     $payment = Payment::where('order_number', $transaction->order_number)->first();
-
-    //     $pdf = PDF::loadView('pages.transaction.outgoing_transaction.pdf.outgoing_report', compact('transaction', 'transaction_details', 'payment'))
-    //                 ->setPaper($paperSize, $paperOrientation)
-    //                 ->setOptions([
-    //                     'margin-top' => $marginTop,
-    //                     'margin-right' => $marginRight,
-    //                     'margin-bottom' => $marginBottom,
-    //                     'margin-left' => $marginLeft,
-    //                 ]);
-
-    //     return $pdf->download('Nota Transaksi.pdf');
-    // }
 }
