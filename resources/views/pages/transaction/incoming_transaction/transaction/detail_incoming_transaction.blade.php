@@ -47,28 +47,6 @@
                             <!--end::Header-->
                             <!--begin::Body-->
                             <div class="card-body py-3 pt-10 mb-15">
-                                <!--begin::Input group-->
-                                <div class="row g-12 mb-5">
-                                    <!--begin::Col-->
-                                    <div class="col-md-6 fv-row">
-                                        <input type="text" class="form-control form-control-solid text-center" value="{{ $transaction->name }}" disabled/>
-                                    </div>
-                                    <!--begin::Col-->
-                                    <!--begin::Col-->
-                                    {{-- <div class="col-md-4 fv-row">
-                                        <select class="form-select form-select-solid text-center" data-hide-search="true" disabled >
-                                            <option>{{ $transaction->payment_type == 1 ? 'Tunai' : 'Debit' }}</option>
-                                        </select>
-                                    </div> --}}
-                                    <!--begin::Col-->
-                                    <!--begin::Col-->
-                                    <div class="col-md-6 fv-row">
-                                        <input type="text" class="form-control form-control-solid text-center" value="{{ \Carbon\Carbon::now()->locale('id')->isoFormat('dddd, D MMMM YYYY') }}" disabled/>
-                                    </div>
-                                    <!--begin::Col-->
-                                </div>
-                                <!--end::Input group-->
-
                                 <!--begin::Table container-->
                                 <div class="table-responsive">
                                     <!--begin::Table-->
@@ -98,20 +76,6 @@
                                                 @endphp
                                             @endforeach
                                         </tbody>
-                                        <tfoot>
-                                            <tr class="fw-bold fs-6 text-dark">
-                                                <th colspan="4">Total</th>
-                                                <th class="text-center">Rp. {{ number_format($subTotal, 2, ',', '.') }}</th>
-                                            </tr>
-                                            <tr class="fw-bold fs-6 text-dark">
-                                                <th colspan="4">Bayar</th>
-                                                <th class="text-center">Rp. {{ number_format($payment->payment, 2, ',', '.') }}</th>
-                                            </tr>
-                                            <tr class="fw-bold fs-6 text-dark">
-                                                <th colspan="4">Kembalian</th>
-                                                <th class="text-center">Rp. {{ number_format($payment->money_change, 2, ',', '.') }}</th>
-                                            </tr>
-                                        </tfoot>
                                     </table>
                                     <!--end::Table-->
                                 </div>

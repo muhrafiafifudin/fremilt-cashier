@@ -56,7 +56,6 @@
                                                 <th>No.</th>
                                                 <th>Tanggal</th>
                                                 <th>No. Order</th>
-                                                <th>Pelanggan</th>
                                                 <th>Total</th>
                                                 <th>Status</th>
                                                 <th class="text-center">Aksi</th>
@@ -69,7 +68,6 @@
                                                     <td>{{ $no++ }}</td>
                                                     <td>{{ date('d F Y', strtotime($transaction->created_at)) }}</td>
                                                     <td>{{ $transaction->order_number }}</td>
-                                                    <td>{{ $transaction->name }}</td>
                                                     <td>Rp. {{ number_format($transaction->total, 2, ',', '.') }}</td>
                                                     <td>
                                                         @if ($transaction->payment->transaction_status == 'paid')

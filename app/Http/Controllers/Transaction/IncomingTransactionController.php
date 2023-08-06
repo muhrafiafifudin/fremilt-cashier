@@ -61,6 +61,10 @@ class IncomingTransactionController extends Controller
             $transaction_details->product_id = $cart_item->product_id;
             $transaction_details->product_qty = $cart_item->product_qty;
             $transaction_details->save();
+
+            $product = Product::where('id', $cart_item->product_id)->first();
+            $product->stock += $cart_item->product_qty;
+            $product->update();
         }
 
         $cart_items = Cart::where([['user_id', Auth::id()], ['type', 1]])->get();
@@ -68,8 +72,37 @@ class IncomingTransactionController extends Controller
 
         $transaction_id = Crypt::encrypt($transaction->id);
 
-        return redirect()->route('incoming-transaction.confirm', $transaction_id)->with(['success' => 'Lanjutkan untuk proses bayar !!']);
+        // return redirect()->route('incoming-transaction.confirm', $transaction_id)->with(['success' => 'Lanjutkan untuk proses bayar !!']);
+        return redirect()->route('incoming-transaction.show', $transaction_id);
     }
+
+    // public function store(Request $request)
+    // {
+    //     $transaction = new Transaction();
+    //     $transaction->order_number = rand(0000000000, 9999999999);
+    //     $transaction->user_id = Auth::id();
+    //     $transaction->name = $request->name;
+    //     $transaction->total = $request->total;
+    //     $transaction->type = 1;
+    //     $transaction->save();
+
+    //     $cart_items = Cart::where([['user_id', Auth::id()], ['type', 1]])->get();
+
+    //     foreach ($cart_items as $cart_item) {
+    //         $transaction_details = new TransactionDetail();
+    //         $transaction_details->transaction_id = $transaction->id;
+    //         $transaction_details->product_id = $cart_item->product_id;
+    //         $transaction_details->product_qty = $cart_item->product_qty;
+    //         $transaction_details->save();
+    //     }
+
+    //     $cart_items = Cart::where([['user_id', Auth::id()], ['type', 1]])->get();
+    //     Cart::destroy($cart_items);
+
+    //     $transaction_id = Crypt::encrypt($transaction->id);
+
+    //     return redirect()->route('incoming-transaction.confirm', $transaction_id)->with(['success' => 'Lanjutkan untuk proses bayar !!']);
+    // }
 
     public function update(Request $request, $id)
     {
