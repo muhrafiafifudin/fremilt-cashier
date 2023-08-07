@@ -164,7 +164,7 @@ class OutgoingTransactionController extends Controller
 
 
         if ($request->money_change == 0) {
-            $pay = 0;
+            $pay = $transaction->total;
         } else {
             $pay = $transaction->total + $request->money_change;
         }

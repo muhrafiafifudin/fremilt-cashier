@@ -8,10 +8,6 @@ $(document).ready(function() {
 
     $("#add_product_transaction_table").DataTable();
 
-    $(".payment-input").each(function () {
-        $(this).prop("required", true);
-    });
-
     $(".payment-input").on("input", function (e) {
         let total = $("#total_outgoing_transaction").val();
         let payment = $("#payment_outgoing_transaction").val();
