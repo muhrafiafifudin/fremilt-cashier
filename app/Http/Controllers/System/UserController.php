@@ -24,9 +24,10 @@ class UserController extends Controller
             $user->email = $request->email;
             $user->save();
 
+            $user->assignRole('user');
+
             return redirect()->route('user.index')->with(['success' => 'Berhasil Menambahkan Data !!']);
         } catch (\Throwable $th) {
-            dd($th);
             return redirect()->route('user.index')->with(['error' => 'Gagal Menambahkan Data !!']);
         }
     }
