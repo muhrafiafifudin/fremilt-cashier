@@ -266,14 +266,14 @@
                                     <span class="menu-title">Data Bahan</span>
                                 </a>
                             </div>
-                            <div class="menu-item">
+                            {{-- <div class="menu-item">
                                 <a class="menu-link {{ request()->is('laporan/toping') ? 'active' : '' }}" href="{{ route('report.topping') }}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
                                     <span class="menu-title">Data Toping</span>
                                 </a>
-                            </div>
+                            </div> --}}
                             <div class="menu-item">
                                 <a class="menu-link {{ request()->is('laporan/produk') ? 'active' : '' }}" href="{{ route('report.product') }}">
                                     <span class="menu-bullet">
