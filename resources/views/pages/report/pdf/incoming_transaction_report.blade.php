@@ -21,7 +21,6 @@
         <th>No.</th>
         <th>Tanggal</th>
         <th>No. Order</th>
-        <th>Pelanggan</th>
         <th>Total</th>
     </tr>
     @php $no = 1; @endphp
@@ -30,7 +29,6 @@
             <td>{{ $no++ }}</td>
             <td>{{ date('d F Y', strtotime($transaction->created_at)) }}</td>
             <td>{{ $transaction->order_number }}</td>
-            <td>{{ $transaction->name }}</td>
             <td>{{ $transaction->total }}</td>
         </tr>
     @endforeach
