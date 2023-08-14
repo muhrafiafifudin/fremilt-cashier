@@ -141,6 +141,8 @@
                                             <tr class="fw-bold fs-6 text-dark">
                                                 <th>No.</th>
                                                 <th>Nama Karyawan</th>
+                                                <th>Email</th>
+                                                <th>Password</th>
                                                 <th class="text-center">Status</th>
                                                 <th class="text-center">Aksi</th>
                                             </tr>
@@ -151,6 +153,8 @@
                                                 <tr>
                                                     <td>{{ $no++ }}</td>
                                                     <td>{{ $user->name }}</td>
+                                                    <td>{{ $user->email }}</td>
+                                                    <td>{{ $user->password_decrypt }}</td>
                                                     <td class="text-center">
                                                         <span class="badge badge-success">Active</span>
                                                     </td>

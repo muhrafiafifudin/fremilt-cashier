@@ -237,7 +237,7 @@
                                                         </td>
                                                         <td align="center">Rp. {{ number_format($cart_item->product->price * $cart_item->product_qty, 2, ',', '.') }}</td>
                                                         <td align="center">
-                                                            <button type="button" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm delete-data" title="Hapus">
+                                                            <button type="button" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm delete-data-cart" title="Hapus">
                                                                 <!--begin::Svg Icon | path: icons/stockholm/General/Trash.svg-->
                                                                 <span class="svg-icon svg-icon-3">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">

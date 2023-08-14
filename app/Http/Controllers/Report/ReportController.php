@@ -76,7 +76,7 @@ class ReportController extends Controller
 
     public function pdf_incoming_transaction_report($fromDate, $toDate)
     {
-        $transactions = Transaction::whereDate('created_at', '>=', $fromDate)
+        $transactions = Transaction::with('transactionDetail')->whereDate('created_at', '>=', $fromDate)
             ->whereDate('created_at', '<=', $toDate)
             ->where('type', 1)
             ->get();
@@ -93,7 +93,7 @@ class ReportController extends Controller
 
     public function pdf_outgoing_transaction_report($fromDate, $toDate)
     {
-        $transactions = Transaction::whereDate('created_at', '>=', $fromDate)
+        $transactions = Transaction::with('transactionDetail')->whereDate('created_at', '>=', $fromDate)
             ->whereDate('created_at', '<=', $toDate)
             ->where('type', 2)
             ->get();

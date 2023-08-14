@@ -12,6 +12,19 @@
     }
 </style>
 
+<table width="100%" style="border: none">
+    <tr style="border: none">
+        <td width="30%" style="border: none">
+            {{-- <img src="users/img/logo.png" alt="navbar brand" width="300px"> --}}
+            <img alt="Logo" src="assets/media/logos/fremilt.png" width="200px" />
+        </td>
+        <td width="70%" style="border: none; line-height:10px; font-size: 14px">
+            <h2 class="text-center">Fremilt Solo Baru</h2>
+            <p class="text-center">Jl. Mangesti Raya No.19, Solo Baru, Surakarta, Jawa Tengah</p>
+        </td>
+    </tr>
+</table>
+
 <h3 class="text-center" style="line-height: 10px; margin-top: 5rem">Laporan Bahan</h3>
 
 <br>
