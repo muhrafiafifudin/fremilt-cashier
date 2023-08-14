@@ -12,6 +12,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
+        $users = $users->except(6);
 
         return view('pages.system.user', compact('users'));
     }

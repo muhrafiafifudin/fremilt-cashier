@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->default(bcrypt('12345678'));
+            $table->string('password_decrypt')->default('12345678')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
